@@ -34,3 +34,5 @@ Locate the folder you want to share > Right Click on it > `Properties . . .`
   - Security tab: `Add . . .` > Add `Everyone` > Check all boxes
 <img src="https://raw.githubusercontent.com/mariodivece/blog/master/images/printer-security.png"></img>
 
+### References
+ - http://serverfault.com/questions/51635/how-can-an-unauthenticated-user-access-a-windows-share
