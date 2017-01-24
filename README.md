@@ -36,3 +36,5 @@ Locate the folder you want to share > Right Click on it > `Properties . . .`
 
 ### References
  - http://serverfault.com/questions/51635/how-can-an-unauthenticated-user-access-a-windows-share
+ - http://nikolar.com/2015/03/10/creating-network-share-with-anonymous-access/
+ 
