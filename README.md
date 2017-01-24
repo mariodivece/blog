@@ -17,3 +17,4 @@ I wanted to experiment a bit with anonymous File and PRinter Sharing in Windows 
  - Network access: Let Everyone permissions apply to anonymous users: `Enabled`
  - Network access: Do not allow anonymous enumeration of SAM accounts and shares: `Disabled`
  
+<img srec="https://raw.githubusercontent.com/mariodivece/blog/master/images/local-segurity-policy.png"></img>
