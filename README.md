@@ -23,10 +23,14 @@ I wanted to experiment a bit with anonymous File and PRinter Sharing in Windows 
 
 Locate the folder you want to share > Right Click on it > `Properties . . .`
  - `Sharing` tab: `Advanced Sharing` > `Permissions` > `Add . . .` > Add `Everyone` > Check `Read` and `Change`
+<img src="https://raw.githubusercontent.com/mariodivece/blog/master/images/file-sharing.png"></img>
  - `Security` tab: `Edit . . .` > `Add . . .` > Add `Everyone` > Check `Full Control` (or approriate file permissions)
- 
+<img src="https://raw.githubusercontent.com/mariodivece/blog/master/images/file-security.png"></img>
+
 ### Sharing a Printer
 `Start` > `Devices and Printers` > Locate the printer to share and right-click on it > `Printer properties`
   - Sharing tab: `Share this printer`: ticked, `Render print jobs on client computers`: ticked
+ <img src="https://raw.githubusercontent.com/mariodivece/blog/master/images/printer-sharing.png"></img>
   - Security tab: `Add . . .` > Add `Everyone` > Check all boxes
- 
+<img src="https://raw.githubusercontent.com/mariodivece/blog/master/images/printer-security.png"></img>
+
