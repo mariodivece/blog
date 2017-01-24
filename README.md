@@ -25,9 +25,8 @@ Locate the folder you want to share > Right Click on it > `Properties . . .`
  - `Sharing` tab: `Advanced Sharing` > `Permissions` > `Add . . .` > Add `Everyone` > Check `Read` and `Change`
  - `Security` tab: `Edit . . .` > `Add . . .` > Add `Everyone` > Check `Full Control` (or approriate file permissions)
  
- ### Sharing a Printer
- 
- `Start` > `Devices and Printers` > Locate the printer to share and right-click on it > `Printer properties`
+### Sharing a Printer
+`Start` > `Devices and Printers` > Locate the printer to share and right-click on it > `Printer properties`
   - Sharing tab: `Share this printer`: ticked, `Render print jobs on client computers`: ticked
   - Security tab: `Add . . .` > Add `Everyone` > Check all boxes
  
