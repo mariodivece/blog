@@ -20,7 +20,7 @@ Below is a digram of what we want to accomplish. We basically want to tunnel LAN
 - We will need to setup an Azure Route Table in our `vnet-lan`
 - We will create a Router/IPsec gateway VM in Ubuntu Linux 16 LTS that will act as the brigde between Azure VMs and all other local sites.
 - We will setup the barnch office sites to connect to our Azure Router VM
-<img src="https://raw.githubusercontent.com/mariodivece/strongswan-bridge-guide/master/images/diagram-objective.png"></img>
+<img src="https://raw.githubusercontent.com/mariodivece/blog/master/images/diagram-objective.png"></img>
 In the diagram above, carefully note that our Azure Router VM is not connected to the internet **DIRECTLY**. It uses a Default Gateway that Azure **automatically** sets up for every subnet. In our case `vnet-lan`. Referring to the diagram:
 - Azure `vnet` Address Space: 10.55.0.0/16 (somewhat irrelevant)
 - Azure `vnet-lan` Subnet: 10.55.0.0/20 (within address space above)
@@ -32,9 +32,9 @@ In the diagram above, carefully note that our Azure Router VM is not connected t
 - Azure Router VM Local IP: 10.55.1.1 (Make sure it has a static IP address assignment)
  
 ## The Procedure - On Windows Azure
-1. Start by ensuring you have a `vnet` Virtual Network and and a `vent-lan` Subnet associated with it, according to the sample parameters above. The image below shows my `vnet` and `vnet-lan` configurations. <img src="https://raw.githubusercontent.com/mariodivece/strongswan-bridge-guide/master/images/vnet-config.png"></img> <img src="https://raw.githubusercontent.com/mariodivece/strongswan-bridge-guide/master/images/vnet-lan-config.png"></img>
-2. Go ahead and create a Route Table `vnet-routes`. It will allow IP packet forwarding from Azure VMs to our Azure Router VM **exclusively** for our branch office sites. The Next Hop setting of every entry must be set to `Virtual Appliance` and the IP address of our Azure Router VM (in this example `10.55.1.1`). Associate the new route table to your `vnet-lan`. Below is a screenshot of my configuration. <img src="https://raw.githubusercontent.com/mariodivece/strongswan-bridge-guide/master/images/vnet-routes.png"></img> <img src="https://raw.githubusercontent.com/mariodivece/strongswan-bridge-guide/master/images/vnet-routes-config.png"></img>
-3. Create a new Azure VM: This will be our Azure Router VM which I will refer to as `vm-router`. I have selected Ubuntu Server 16 LTS with 1 core and 3.5 GB of memory. A total of 4 resources were created when I created this VM: A network interface, a netork security group, a public IP address, and the VM itself. It also created the VHD blob (virtual hard disk) for my VM in the storage account I selected. Make sure the newtork interface has a static private IP address `router-private-ip` assignment of `10.55.1.1`. The public IP address of this interface will be set to Dynamic. Change it to Static. Also, keep a note on this Public IP Adddress (which I will call `router-public-ip`), because we will connect via SSH to this machine to configure it as a router and an IPsec bridge and we will also use it to configure the bridge. In our next step. I am attaching some screenshots for reference purposes. <img src="https://raw.githubusercontent.com/mariodivece/strongswan-bridge-guide/master/images/vm-router-vm.png"></img> <img src="https://raw.githubusercontent.com/mariodivece/strongswan-bridge-guide/master/images/vm-router-config.png"></img>
+1. Start by ensuring you have a `vnet` Virtual Network and and a `vent-lan` Subnet associated with it, according to the sample parameters above. The image below shows my `vnet` and `vnet-lan` configurations. <img src="https://raw.githubusercontent.com/mariodivece/blog/master/images/vnet-config.png"></img> <img src="https://raw.githubusercontent.com/mariodivece/blog/master/images/vnet-lan-config.png"></img>
+2. Go ahead and create a Route Table `vnet-routes`. It will allow IP packet forwarding from Azure VMs to our Azure Router VM **exclusively** for our branch office sites. The Next Hop setting of every entry must be set to `Virtual Appliance` and the IP address of our Azure Router VM (in this example `10.55.1.1`). Associate the new route table to your `vnet-lan`. Below is a screenshot of my configuration. <img src="https://raw.githubusercontent.com/mariodivece/blog/master/images/vnet-routes.png"></img> <img src="https://raw.githubusercontent.com/mariodivece/blog/master/images/vnet-routes-config.png"></img>
+3. Create a new Azure VM: This will be our Azure Router VM which I will refer to as `vm-router`. I have selected Ubuntu Server 16 LTS with 1 core and 3.5 GB of memory. A total of 4 resources were created when I created this VM: A network interface, a netork security group, a public IP address, and the VM itself. It also created the VHD blob (virtual hard disk) for my VM in the storage account I selected. Make sure the newtork interface has a static private IP address `router-private-ip` assignment of `10.55.1.1`. The public IP address of this interface will be set to Dynamic. Change it to Static. Also, keep a note on this Public IP Adddress (which I will call `router-public-ip`), because we will connect via SSH to this machine to configure it as a router and an IPsec bridge and we will also use it to configure the bridge. In our next step. I am attaching some screenshots for reference purposes. <img src="https://raw.githubusercontent.com/mariodivece/blog/master/images/vm-router-vm.png"></img> <img src="https://raw.githubusercontent.com/mariodivece/blog/master/images/vm-router-config.png"></img>
 4. Turning the Ubuntu Azure VM into a router and a bridge takes very little effort but it's actually where the magic happens.
  - Use PuTTY or any other SSH client to connect to the public IP address of `vm-router`. Enter the username and password you set for the VM when you created it.
  - Enter root mode by typing in: `sudo sudo su`
@@ -101,11 +101,11 @@ conn router_site-02
 
 There really isn't anything complicated here. It's the typical Site-to-Site VPN setup. Create A Gateway matching our `vm-router`'s `router-public-ip`, and create a connection with the `AES-128 (ACC)` policy. I am attaching some screenshots to give you an idea.
 
-<img src="https://raw.githubusercontent.com/mariodivece/strongswan-bridge-guide/master/images/sophos-gateway.png"></img>
+<img src="https://raw.githubusercontent.com/mariodivece/blog/master/images/sophos-gateway.png"></img>
 
-<img src="https://raw.githubusercontent.com/mariodivece/strongswan-bridge-guide/master/images/sophos-policy.png"></img>
+<img src="https://raw.githubusercontent.com/mariodivece/blog/master/images/sophos-policy.png"></img>
 
-<img src="https://raw.githubusercontent.com/mariodivece/strongswan-bridge-guide/master/images/sophos-connection.png"></img>
+<img src="https://raw.githubusercontent.com/mariodivece/blog/master/images/sophos-connection.png"></img>
 
 ## Conclusion
 
