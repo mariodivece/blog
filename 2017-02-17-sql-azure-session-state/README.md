@@ -20,7 +20,7 @@ In the code below, the attribute ```allowCustomSqlDatabase="true"``` is key to m
 
 ## Create the tables and stored procedures
 
-The code below is a modified version of the typical ```InstallSqlState.sql``` which ships with the .NET framework. The difference is that it does not create a separate DB. Therefore, you will need to run this script with your target DB selected and not on the ```master``` DB.
+The code below is a modified version of the typical ```InstallSqlState.sql``` which ships with the .NET framework. The difference is that it does not create a separate DB. Therefore, you will need to run this script with your target DB selected and not on the ```master``` DB. You can download the file <a href="https://raw.githubusercontent.com/mariodivece/blog/master/2017-02-17-sql-azure-session-state/InstallSqlState.sql">here</a>.
 
 ```sql
 /*********************************************************************
