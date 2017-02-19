@@ -2,9 +2,11 @@
 
 They are all over the internet. 
 These guides on how to setup ASP.NET session state on SQL Server and especially on SQL Azure don't have all the info or are missing the code.
-The goal of this guide is to show you how to setup ASP.NET Session State using SQL server (compatible with SQL Azure).
+The goal of this guide is to show you how to setup ASP.NET Session State using SQL server (compatible with SQL Azure). This slightly modified version of the typical ```InstallSqlState.sql``` which creates a separate database and might not be exactly with you want to do, especially in SQL Azure.
 
 ## Setup your ```Web.config``` file
+
+In the code below, the attribute ```allowCustomSqlDatabase="true"``` is key to making this work correctly.
 
 ```xml
   <system.web>
@@ -17,6 +19,8 @@ The goal of this guide is to show you how to setup ASP.NET Session State using S
 ```
 
 ## Create the tables and stored procedures
+
+The code below is a modified version of the typical ```InstallSqlState.sql``` which ships with the .NET framework. The difference is that it does not create a separate DB. Therefore, you will need to run this script with your target DB selected and not on the ```master``` DB.
 
 ```sql
 /*********************************************************************
