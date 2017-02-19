@@ -1,6 +1,11 @@
 # My Blog
 A repository with technical tips, notes and some code
 
+*:star: Please star my blog if you find it useful!*
+
+[![Analytics](https://ga-beacon.appspot.com/UA-8535255-2/mariodivece/blog/)](https://github.com/igrigorik/ga-beacon)
+
+
 | Date | Entry | Categories |
 |------|-------|------------|
 | 2017-01-03 | <a href="https://github.com/mariodivece/blog/tree/master/2017-01-03-strongswan-bridge-azure">Multiple IPSec Policy Routes in Windows Azure</a> | Infrastructure, IPsec, Linux |
