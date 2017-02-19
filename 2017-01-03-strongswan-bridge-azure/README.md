@@ -1,10 +1,6 @@
 # Multiple Sophos (IKEv1) to Azure IPsec Tunnels
 A guide on how to setup multiple site-to-site IPsec connections between Sophos UTMs and Windows Azure
 
-*:star: Please star this guide if you find it useful!*
-
-[![Analytics](https://ga-beacon.appspot.com/UA-8535255-2/unosquare/strongswan-guide/)](https://github.com/igrigorik/ga-beacon)
- 
 ## Introduction
 Windows Azure is a great PaaS provider from Microsoft that allows companies to connect their local resources to their Azure infrastructure. This guide assumes you are familiar with site-to-site VPNs and that you need to connect multiple IKEv1 Policy Route SAs to Windows Azure. You need to be very patient because these things could take up a number of hours of your time. Make sure you can focus on these procedures for about 4 hours.
 
