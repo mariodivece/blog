@@ -2,7 +2,11 @@
 
 ## Introduction
 
+Hello! Let me start by telling you about myself: I have been developing software for the better part of my life. Almost 20 years now. 
+I got my Electrical Engineering degree from the University of Alberta. I am a proud Mexican and I own a small software consultancy services firm called Unosquare.
 
+There are two reasons why I wanted to write this guide: First, I see that most software engineers, developers and even some IT people 
+simply don't have enough knowledge or the experience required to become productive fast enough in our quickly evolving industry. My hope is that I cover enough material to make you, the reader, feel plenty confident when solving any problem you are given. Second, in addition to feeling the need of giving back a little and sharing my knowledge, I also felt that I wanted to keep notes and explanations on my own conclusions. So it will serve as a set of notes to myself too.
 
 ## Chapter 1: Networking Basics
 
@@ -15,7 +19,7 @@ We will also cover useful information regarding Wireless Networks and how to set
 In this chapter we will cover the notion of routing. It includes comcepts such as Network Address Translation, Gateways, Firewalls, and other
 means of establishing communications between computer systems.
 
-## Chater 3: DNS, HTTP and HTTPS
+## Chapter 3: DNS, HTTP and HTTPS
 
 Here we will learn how DNS works and why it is important when deploying web applications. We will also explore the specifics of the HTTP 
 protocol and how asymmetric cryptography makes HTTPS possible and why it is important.
