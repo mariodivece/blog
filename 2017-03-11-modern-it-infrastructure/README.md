@@ -6,28 +6,76 @@ Hello! Let me start by telling you about myself. I have been developing software
 I got my Electrical Engineering degree from the University of Alberta. I am a proud Mexican and I own a small software consultancy services firm called Unosquare.
 
 There are two reasons why I wanted to write this guide: First, I see that most software engineers, developers and even some IT people 
-simply don't have enough knowledge or the experience required to become productive fast enough in our quickly evolving industry. My hope is that I cover enough material to make you, the reader, feel plenty confident at solving any problem you are given. Second, in addition to feeling the need of giving back a little and sharing my knowledge, I also felt that I wanted to keep notes and explanations on my own conclusions. So it will serve as a set of notes to myself too.
+simply don't have enough knowledge or the experience required to become productive fast enough in our quickly evolving industry. My hope is that I cover enough material to make you, the reader, feel plenty confident at solving any problem you are presented with. Second, in addition to feeling the need of giving back a little by sharing my knowledge, I also felt that I wanted to keep notes and explanations on my own conclusions. So this guide will serve as a set of notes to myself too.
 
 ## Chapter 1: Networking Basics
 
-In this chapter we will cover IPv4 and IPv6 address notations, address classes, unicast, broadcast and multicast communications. We will
-examine the differences between TCP and UDP. We will look at common types of switching technologies available and how these are useful.
-We will also cover useful information regarding Wireless Networks and how to set them up properly.
+In this chapter we will cover IPv4 and IPv6 address notations, subnets, address classes, unicast, broadcast and multicast communications. We will examine the differences between TCP and UDP. We will look at common types of switching technologies available and how these are useful. We will also cover useful information regarding Wireless Networks and how to set them up properly.
 
 ### The Internet Protocol Suite
 
-For most of you, this section will be rather trivial. I still recommend you read through it. The *Internet Protocol* or *IP* is a generic, standard network protocol suite that provides the basis for additional comminucation protocols on top of it such as *TCP* or *Transmission Control Protocol* and *UDP* or *User Datagram Protocol*. The *IP* suite operates on Layer 3, the Network Layer of the OSI model. We are not going to cover the *OSI* (Open Systems Interconnect) because it is basic material that is not going to be referenced much throughout this guide.
+For most of you, this section will be rather trivial. I still recommend you read through it. The *Internet Protocol* or *IP* is a generic, standard network protocol suite that provides the basis for additional comminucation protocols on top of it such as *TCP* or *Transmission Control Protocol* and *UDP* or *User Datagram Protocol*. The *IP* suite operates on Layer 3, the Network Layer of the OSI model. We are not going to cover the *OSI* model (Open Systems Interconnect) in detail because it is material that is not going to be referenced much throughout this guide. I do recommend you review it.
 
-What is important, is that you understand that *IP* defines basic aspects of communications and networking. It is commonly know as **TCP/IP** because the original protocol in the *IP* suite was *TCP* but *IP* and *TCP* are different things, so please forget *TCP* for now because *TCP* is a protocol that is part of the *suite* of protcols that build on top of *IP*. Let me repeat that: Protocols such as *TCP* and *UDP* are part of a *suite* of protocols that build on **top** of the *IP* standard. The common name **TCP/IP** is still in use for convention reasons.
+What is important, is that you understand that *IP* defines basic aspects of communications and networking. It is commonly know as **TCP/IP** because the original protocol in the *IP* suite was *TCP* but *IP* and *TCP* are different things, so please forget *TCP* for now because *TCP* is a _protocol_ that is part of the *suite* of protcols that build on top of *IP*. Let me repeat that: Protocols such as *TCP* and *UDP* are part of a *suite* of protocols that build on **top** of the *IP* standard. The name **TCP/IP** is still quite unfortunately in use today for convention reasons.
 
-So, let's cut to the chase: what standard aspects of networking are defined by the *Internet Protocol*, or *IP*? Many, in fact. But you just need to understand a few of them.
+So, let's cut to the chase. What standard aspects of networking are defined by the *Internet Protocol*, or *IP*? Many, in fact. But you just need to deeply understand a few of them. Keep in mid that the OSI model defines 7 layers for network communication. The IP specification in constrast, defines only 4 of them with slightly different and somewhat overlapping concepts. Here is a table with a rough comparison. See [RFC-1122](https://tools.ietf.org/html/rfc1122) for additional reference.
 
- - Addresses: It defines a way to represent network addresses, or mor properly called, IP Addresses.
- - Packets: It defines a transmission data structure with 2 parts. The first is called the *IP Header* whcih contains information about the source, destination, and the second is the *IP Data* which contains the messages between such senders and receivers. Packets themselves are contained within Layer 2 (Link layer of the OSI model) structures calles *frames*.
- 
+<table>
+<thead>
+  <th>Layer</th>
+  <th>OSI Model</th>
+  <th>IP Equivalence</th>
+</thead>
+<tbody>
+	<tr>
+      <td>7</td>
+      <td>Application</td>
+      <td rowspan="3">Application: Higher level protocols such as FTP or HTTP</td>
+    </tr>
+	<tr>
+      <td>6</td>
+      <td>Presentation</td>
+    </tr>
+	<tr>
+      <td>5</td>
+      <td>Session</td>
+    </tr>
+	<tr>
+      <td>4</td>
+      <td>Transport</td>
+      <td>Transport: IP Suite protocol such as TCP or UDP</td>
+    </tr>
+	<tr>
+      <td>3</td>
+      <td>Network</td>
+      <td>Internet and Link layers. Packets within Frames</td>
+    </tr>
+	<tr>
+      <td>2</td>
+      <td>Data Link</td>
+      <td>Frames (not part of IP)</td>
+    </tr>
+	<tr>
+      <td>1</td>
+      <td>Physical</td>
+      <td>Bits (not part of IP)</td>
+    </tr>
+</tbody>
+</table>
+
+The IP layer model is actually older IP was introduced officially in 1982 (the year I was born!) and the OSI Model was published in 1982. But enough about layers. Let's take a look at the fundamental elements that is practical to understand.
+
+- **Addresses**: It defines a way to represent network addresses, or more properly called, IP Addresses.
+- Packets: It defines a transmission data structure with 2 parts. The first is called the *IP Header* whcih contains information about the source, destination, and the second is the *IP Data* which contains the messages (or payload) between such senders and receivers. Packets themselves are contained within Layer 2 (Link layer of the OSI model) structures called *frames*.
+ ```TODO: Picture here```
  | Frame Header | IP Header | Protocol Header | Protocol Data | Frame Footer |
- - Gateways: Gateways or Routers are computers that map and know how to reach a number of addresses in the Internet on behalf of a client. A router allows other computers to send and receive packets to and from destinations thay can't really reach on their own. Gateways typically reach their final destinations by using other gateways and that is how the entire Internet connects. Every time a packet passes through a router, this is called a *hop*. Please visit [this site](http://www.vox.com/a/internet-maps) containing maps that will help you understand how this works.
- - Ports: In addition to identifying source and destination computers, ports are used to identify applications within computers. This allows different programs running in the same computer to communicate with other computers simultaneously. Please not that ports are technically **NOT** part of the *IP* specification 
+- **Gateways**: Gateways or more porperly called **Routers**, are computers that map and know how to reach a number of addresses in the Internet or some other network on behalf of another host. A router allows other computers to send and receive packets to and from destinations thay can't really reach on their own. Gateways typically reach their final destinations wither directly or by using other gateways and that is how the entire Internet connects together: like a web of hosts behind routers connect to each other. Interestingly enough, a network *hop* occurs when a packet passes through one of these routers. Please visit [this site](http://www.vox.com/a/internet-maps) containing charts that will help you visualize how this works. Just for fun, try to use the ```tracert``` command to see how many hops (or routers) your computer needs to go through in order to reach google.com. Try:
+
+``` 
+> tracert google.com 
+```
+
+- **Ports**: In addition to identifying source and destination hosts using addresses, ports are used to identify applications within hosts. This allows different programs running in the same computer to communicate with other computers simultaneously. Please note that ports are technically **NOT** part of the *IP* specification 
 
 In contrast, *IP* does **not** define the following:
  - The order in which packets are sent and received.
@@ -35,7 +83,7 @@ In contrast, *IP* does **not** define the following:
  - Determining if the packets were received without corruption by the destination computer.
  - The format of the data contained in the packets.
  
-In other words, *IP* defines **how to create connections** between multiple systems, simplifying potentially complex network topology by  *hiding* it or *abstracting* the details away. But without additional standard protocols defined on top of it, you should have realized by now that it really is not of much practical use when defining **how multiple systems shall communicate**. Think about why for a few minutes.
+In other words, *IP* defines **how to create connections** between multiple hosts, simplifying potentially complex network topology by  *hiding* it or *abstracting* the details away. But without additional standard protocols defined on top of it, you should have realized by now that it really is not of much practical use when defining **how multiple systems shall communicate**. Think about why for a few minutes.
 
 #### IPv4 Addresses
 
@@ -58,12 +106,9 @@ A Router will typically have at least 2 network interfaces. One connecting to th
 
 Subnet Masks:
 
-
+#### UDP: Fire-and-Forget
 
 #### TCP: Reliable Communication
-
-
-#### UDP: Fire-and-Forget
 
 
 #### Unicast, Broadcast and Multicast
