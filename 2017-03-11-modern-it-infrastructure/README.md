@@ -14,9 +14,9 @@ In this chapter we will cover IPv4 and IPv6 address notations, subnets, address 
 
 ### The Internet Protocol Suite
 
-For most of you, this section will be rather trivial. I still recommend you read through it. The *Internet Protocol* or *IP* is a generic, standard network protocol suite that provides the basis for additional comminucation protocols on top of it such as *TCP* or *Transmission Control Protocol* and *UDP* or *User Datagram Protocol*. The *IP* suite operates on Layer 3, the Network Layer of the OSI model. We are not going to cover the *OSI* model (Open Systems Interconnect) in detail because it is material that is not going to be referenced much throughout this guide. I do recommend you review it.
+For most of you, this section will be rather trivial. I still recommend you read through it. The *Internet Protocol* or *IP* is a generic, standard _network_ protocol specification that provides the basis for additional _transport_ protocols on top of it such as *TCP* or *Transmission Control Protocol* and *UDP* or *User Datagram Protocol*. The *IP* protocol operates on Layer 3, the Network Layer of the OSI model. We are not going to cover the *OSI* model (Open Systems Interconnect) in detail because it is material that is not going to be referenced much throughout this guide. I do recommend you review it [ISO 749801](https://www.ecma-international.org/activities/Communications/TG11/s020269e.pdf).
 
-What is important, is that you understand that *IP* defines basic aspects of communications and networking. It is commonly know as **TCP/IP** because the original protocol in the *IP* suite was *TCP* but *IP* and *TCP* are different things, so please forget *TCP* for now because *TCP* is a _protocol_ that is part of the *suite* of protcols that build on top of *IP*. Let me repeat that: Protocols such as *TCP* and *UDP* are part of a *suite* of protocols that build on **top** of the *IP* standard. *TCP* and *UDP* are referred to as **Transport Layer** protocols. The name **TCP/IP** is still quite unfortunately in use today for convention reasons. But TCP does not imply IP or viceversa.
+What is important, is that you understand that *IP* defines basic standards of _network_ communications in its [RFC-791](https://tools.ietf.org/html/rfc791). People commonly and interchangebly refer to the *IP* protocol as **TCP/IP** because the original protocol in the *IP* suite was *TCP* but *IP* and *TCP* are **different** things, so please forget *TCP* for now because *TCP* is a _transport protocol_ that is part of the *suite* of protcols that build on top of *IP*. Let me repeat that: **Transport** protocols such as *TCP* and *UDP* are part of a *suite* of protocols that build on **top** of the *IP* sspecification. *TCP* and *UDP* are referred to as **Transport Layer** protocols. The term **TCP/IP** is in use today for convention reasons. But TCP does not imply IP or viceversa.
 
 So, let's cut to the chase. What standard aspects of networking are defined by the *Internet Protocol*, or *IP*? Many, in fact. But you just need to deeply understand a few of them. Keep in mid that the OSI model defines 7 layers for network communication. The IP specification in constrast, defines only 4 of them with slightly different and somewhat overlapping concepts. Here is a table with a rough comparison. See [RFC-1122](https://tools.ietf.org/html/rfc1122) for additional reference.
 
@@ -63,27 +63,24 @@ So, let's cut to the chase. What standard aspects of networking are defined by t
 </tbody>
 </table>
 
-The IP layer model is actually older IP was introduced officially in 1982 (the year I was born!) and the OSI Model was published in 1982. But enough about layers. Let's take a look at the fundamental elements that is practical to understand.
+The IP layer model is actually older IP was introduced officially in 1982 (the year I was born!) and the OSI Model was published in 1984. But enough about layers. Let's take a look at the fundamental elements that is practical to understand.
 
-- **Addresses**: It defines a way to represent network addresses, or more properly called, IP Addresses.
-- Packets: It defines a transmission data structure with 2 parts. The first is called the *IP Header* whcih contains information about the source, destination, and the second is the *IP Data* which contains the messages (or payload) between such senders and receivers. Packets themselves are contained within Layer 2 (Link layer of the OSI model) structures called *frames*.
- ```TODO: Picture here```
- | Frame Header | IP Header | Protocol Header | Protocol Data | Frame Footer |
+- **Addresses**: It defines a way to represent network addresses, or more properly called, IP Addresses. Addresses are unique in a network and identify hosts. Hosts can have 1 or more IP addresses too.
+- **Packets**: It defines a transmission data structure with 2 parts. The first is called the *IP Header* whcih contains information about the source, destination, and a number of other details, and the second is the *IP Data* which contains the messages (or payload) between senders and receivers. Packets themselves are part of the Network layer and are contained within Layer 2 (Link Layer of the OSI model) structures called *frames*. [More about the structure of IP packets is available here.](https://tools.ietf.org/html/rfc791#section-3.1) ``` TODO: Picture here```
 - **Gateways**: Gateways or more porperly called **Routers**, are computers that map and know how to reach a number of addresses in the Internet or some other network on behalf of another host. A router allows other computers to send and receive packets to and from destinations thay can't really reach on their own. Gateways typically reach their final destinations wither directly or by using other gateways and that is how the entire Internet connects together: like a web of hosts behind routers connect to each other. Interestingly enough, a network *hop* occurs when a packet passes through one of these routers. Please visit [this site](http://www.vox.com/a/internet-maps) containing charts that will help you visualize how this works. Just for fun, try to use the ```tracert``` command to see how many hops (or routers) your computer needs to go through in order to reach google.com. Try:
 
 ``` 
 > tracert google.com 
 ```
 
-- **Ports**: In addition to identifying source and destination hosts using addresses, ports are used to identify applications within hosts. This allows different programs running in the same computer to communicate with other computers simultaneously. Please note that ports are technically **NOT** part of the *IP* specification 
-
 In contrast, *IP* does **not** define the following:
  - The order in which packets are sent and received.
  - Receiving or sending acknoledgements that packets were received at the intended destination.
  - Determining if the packets were received without corruption by the destination computer.
  - The format of the data contained in the packets.
+ - **Ports**: Surprisingly enough, IP does *not* define the notion of ports. We use addresses to identify hosts, and we use ports to identify applications within hosts. This allows different programs running in the same host to communicate with other hosts simultaneously. Ports are a notion that belongs to the realm of Transport level protocols (such as *TCP* and *UDP*).
  
-In other words, *IP* defines **how to create connections** between multiple hosts, simplifying potentially complex network topology by  *hiding* it or *abstracting* the details away. But without additional standard protocols defined on top of it, you should have realized by now that it really is not of much practical use when defining **how multiple systems shall communicate**. Think about why for a few minutes.
+In other words, *IP* defines **how to create connections** between hosts, simplifying potentially complex network topology by  *hiding* it or *abstracting* the details away. You should now think about how the OSI model is flexible enough and how IP is an  **independent** protocol in networks. In the future we could have a different protocol replace IP (in fact its is happening with *IPv6*, more on that later) and still not be required to change the way Transport-level protocols or applications work.
 
 #### IPv4 Addresses
 
