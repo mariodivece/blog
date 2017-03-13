@@ -154,7 +154,7 @@ In this chapter we will cover basic aspects of Active Directory management, LDAP
 At the time of this writing, Office 365 is in popular demand. We will take a look at cloud-only deployments, hybrid identity management,
 subscription and plan types, PSTN capabilities, and the basics of Exchange Online management.
 
-## Chapter 10: The Provate Branch Exchange
+## Chapter 10: The Private Branch Exchange
 
 We will cover the basics of getting aphone system correctly configured, the implications of using different audo codecs, Trunks, FXO
 Gateways, VoIP phones and their types, and QoS.
