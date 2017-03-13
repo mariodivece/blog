@@ -39,9 +39,15 @@ In other words, *IP* defines **how to create connections** between multiple syst
 
 #### IPv4 Addresses
 
-We mentioned earlier that the *IP* suite provides us with a standard for defining IP Addresses. At the time of this writing, there are 2 versions of *IP* in use worldwide. *IPv4* used by the vast majority of the Internet and *IPv6* used by only a small protion of the Internet. In IPv4, addresses are represented by a 32-bit number. This is roughly 4.3 billion unique addresses. In 2012 different sources estimate that there were between 8 and 10 billion devices connected to the Internet. So how is it possible that all those devices could be identified by using a unique IP address if the maximum amount of unique IP addresses is roughly half that number? That's where address classes come into play.
+We mentioned earlier that the *IP* suite provides us with a standard for defining IP Addresses. At the time of this writing, there are 2 versions of *IP* in use worldwide. *IPv4* used by the vast majority of the Internet and *IPv6* used by only a small protion of the Internet. In IPv4, addresses are represented by a 32-bit number. This is roughly 4.3 billion unique addresses. In 2012 different sources estimate that there were between 8 and 10 billion devices connected to the Internet. So how is it possible that all those devices could be identified by using a unique IP address if the maximum amount of unique IP addresses is roughly half that number? We will explore what *subnetting* is shortly.
 
-Remember we said that Gateways or Routers are computers that understand how to make requests and receive responses from other machines on behalf of the clients behind them. A Router will typically have at least 2 network interfaces. One connecting to the public Internet and one more connected to the private Internet. But how do you differentiate between the 2?
+First, let's look into how to represent IP Addresses. As you most likely already know, we don't represent IP Addresses as some integer such as ```3488329``` and ```-347289985```. We respresent IP Addresses in 4 *octects*, separated by a dot with each octet containing a decimal value from ```0``` to ```255```. It should be obvious that it is called an octet becuase it is 8 bits, and it should be also obvious that the range of an octet contains ```256``` possible values, namely ```0``` to ```255```. So examples of IP Addresses are ```192.168.2.34```, ```8.8.8.8```, ```10.0.1.10```.
+
+Recall we stated Gateways or Routers are computers that understand how to make requests and receive responses from and to other machines on behalf of the clients behind them. So we have a number of computers behind a Router that communicate to the rest of the Internet by asking the router to forward packets to a remote destination. Local LAN addresses are 
+
+But what happens when a client wants to communicate directly with a different client? Turns o
+
+A Router will typically have at least 2 network interfaces. One connecting to the public Internet and one more connected to the switch where the *LAN* or *Local Area Network*. But how do you differentiate between the 2?
 
 Subnet Masks:
 
