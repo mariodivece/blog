@@ -63,11 +63,11 @@ So, let's cut to the chase. What standard aspects of networking are defined by t
 </tbody>
 </table>
 
-The IP layer model is actually older IP was introduced officially in 1982 (the year I was born!) and the OSI Model was published in 1984. But enough about layers. Let's take a look at the fundamental elements that is practical to understand.
+The IP layer model is actually older. IP was introduced officially in 1982 (the year I was born!) and the OSI Model was published in 1984. But enough about layers. Let's take a look at the fundamental elements that are practical and relevant to us.
 
 - **Addresses**: It defines a way to represent network addresses, or more properly called, IP Addresses. Addresses are unique in a network and identify hosts. Hosts can have 1 or more IP addresses too.
-- **Packets**: It defines a transmission data structure with 2 parts. The first is called the *IP Header* whcih contains information about the source, destination, and a number of other details, and the second is the *IP Data* which contains the messages (or payload) between senders and receivers. Packets themselves are part of the Network layer and are contained within Layer 2 (Link Layer of the OSI model) structures called *frames*. [More about the structure of IP packets is available here.](https://tools.ietf.org/html/rfc791#section-3.1) ``` TODO: Picture here```
-- **Gateways**: Gateways or more porperly called **Routers**, are computers that map and know how to reach a number of addresses in the Internet or some other network on behalf of another host. A router allows other computers to send and receive packets to and from destinations thay can't really reach on their own. Gateways typically reach their final destinations wither directly or by using other gateways and that is how the entire Internet connects together: like a web of hosts behind routers connect to each other. Interestingly enough, a network *hop* occurs when a packet passes through one of these routers. Please visit [this site](http://www.vox.com/a/internet-maps) containing charts that will help you visualize how this works. Just for fun, try to use the ```tracert``` command to see how many hops (or routers) your computer needs to go through in order to reach google.com. Try:
+- **Packets**: It defines a transmission data structure with 2 basic parts. The first is called the *IP Header* whcih contains information about the source address, destination address, transport level protocol, and a number of other details. The second is the *IP Data* which contains the transport-level message (or payload) between senders and receivers. Packets themselves are part of the Network layer and are contained within Layer 2 (Link Layer of the OSI model) structures called *frames*. [More about the structure of IP packets is available here.](https://tools.ietf.org/html/rfc791#section-3.1). We will study *frames* when we get to switching.
+- **Gateways**: Gateways or more porperly called **Routers**, are computers that map and know how to reach a number of addresses in the Internet or some other network on behalf of another host. A router allows other computers to send and receive packets to and from destinations thay can't really reach on their own. Gateways typically reach their final destinations either directly, or by using other gateways and that is how the entire Internet connects together: like a web of hosts behind routers connect to each other via routes (more on that later). As a side note, a network *hop* occurs when a packet passes through one of these routers. Please visit [this site](http://www.vox.com/a/internet-maps) containing charts that will help you visualize how this works. And just for fun, try to use the ```tracert``` command to see how many hops (or routers) your computer needs to go through in order to reach google.com. Try:
 
 ``` 
 > tracert google.com 
@@ -122,6 +122,14 @@ Subnet Masks:
 ## Chapter 2: Firewalls and Routing
 
 In this chapter we will cover the notion of routing. It includes comcepts such as Network Address Translation, Gateways, Firewalls, and other means of establishing communications between computer systems.
+
+### How Routers talk to each other
+
+We already know that Routing is fundamental to building IP networks. The Internet is build by putting together a large number of IP networks. But how do routers know how to communicate with each other?  How do they know how many *hops* are required to get a packet to a destination? And how do routers know how to handle a response **all the way back** to the host that sent the request? 
+
+### The trip of IP packets
+
+It is very common to assume that if an IP packet is sent via a series of hops -- or Routers --, a response from the receiving host will take exactly the same route back. This is completely incorrect!
 
 ## Chapter 3: DNS, HTTP and HTTPS
 
