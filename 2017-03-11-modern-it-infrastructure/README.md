@@ -92,7 +92,7 @@ First, let's look into how to represent IP Addresses. As you most likely already
  - Loopback Address: The legandary ```127.0.0.1``` also known as ```localhost``` is an IP address that a host gives itself for testing purposes only. Please note that IP addresses ranging from ```127.0.0.0``` to ```127.255.255.255``` cannot be reached from outside the host so don't use them!
  - "Private" IP Addresses: These address ranges are addresses for hosts that are not directly connected to the Internet. This does not mean that they can't reach the Internet. It just means that they need a Router to do that job for them. The NRO (Number Resource Organization) which is the global organization responsible for tracking public IP address assignments will not give these private IP addresses out. These ranges are: ```10.0.0.0``` to ```10.255.255.255```, ```172.16.0.0``` to ```172.31.255.255```, and ```192.168.0.0``` to ```192.168.255.255```.
  - Multicast and Experimental IP Addresses: These IP addresses are reserved for Multicast communication (more on that later) and experimental portocols. They cannot be used as public IP Addresses. The range is ```224.0.0.0``` to ```239.255.255.255```. 
- - Link-Local IP Addresses: This range of IP Addresses is allocated for communication between hosts on a single link. Whoa! What does that mean exactly? When a network interface in the host is unable to determine what IP address to use because there in no available DHCP server or because it has not been assigned an IP Address manually, it will automatically try to configure itself in order to communicate with other automatically-configured hosts in the network. When you see these addresses though, it typically means there's something wrong with your network.
+ - Link-Local IP Addresses: This range of IP Addresses between ```169.254.0.0``` and ```169.254.255.255``` is allocated for communication between hosts on a single link. Whoa! What does that mean exactly? When a network interface in the host is unable to determine what IP address to use because there in no available DHCP server or because it has not been assigned an IP Address manually, it will automatically try to configure itself in order to communicate with other automatically-configured hosts in the network. When you see these addresses though, it typically means there's something wrong with your network.
  - Other special IP Addresses: There are other, less relevant IP Address ranges. If you wish to consult them, please take a look at [RFC-3330](https://tools.ietf.org/html/rfc3330). 
 
 Recall we stated Gateways or Routers are computers that understand how to make requests and receive responses from and to other machines on behalf of the clients behind them. So we have a number of computers behind a Router that communicate to the rest of the Internet by asking the router to forward packets to a remote destination. Local LAN addresses are 
@@ -131,7 +131,7 @@ We already know that Routing is fundamental to building IP networks. The Interne
 
 It is very common to assume that if an IP packet is sent via a series of hops -- or Routers --, a response from the receiving host will take exactly the same route back. This is completely incorrect!
 
-## Chapter 3: DNS, HTTP and HTTPS
+## Chapter 3: DHCP, DNS, HTTP and HTTPS
 
 Here we will learn how DNS works and why it is important when deploying web applications. We will also explore the specifics of the HTTP 
 protocol and how asymmetric cryptography makes HTTPS possible and why it is important.
