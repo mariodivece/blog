@@ -29,7 +29,7 @@ But OSI model is not the only layer model out there. There are multiple models t
   <th>Layer</th>
   <th>OSI Model</th>
   <th>IP Model</th>
-  <th>Post Office Model</th>
+  <th>Post Office (fictional) Model</th>
 </thead>
 <tbody>
     <tr>
