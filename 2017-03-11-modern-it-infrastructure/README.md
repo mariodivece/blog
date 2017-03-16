@@ -10,15 +10,15 @@ simply don't have enough knowledge or the experience required to become producti
 
 ## Chapter 1: Networking Basics
 
-In this chapter we will cover IPv4 and IPv6 address notations, subnets, address classes, CIDR notation, and unicast, broadcast and multicast communications. We will examine the differences between TCP and UDP. We will look at common types of switching technologies available and how these are useful. We will also cover useful information regarding Wireless Networks and how to set them up properly.
+In this chapter we will cover IPv4 and IPv6 address notations, subnets, address classes, CIDR notation, and unicast, broadcast and multicast communications. We will examine the differences between TCP and UDP. We will look at common types of switching technologies available and how these are useful.
 
 ### The Internet Protocol (IP)
 
-For some of you, this section might feel somewhat repetitive. I still recommend you read through it to clear out any possible confusion. Plus, you might learn a thing or two. The *Internet Protocol* or *IP* is a generic, standard _networking_ protocol designed to **carry** _transport_ protocol messages (called *Segments*) such as *TCP* and *UDP*. The *IP* protocol operates on Layer 3, the Network Layer of the OSI model. while other protocols such as *TCP* and *UDP* belong to Layer 4 of the OSI model, the Transport layer. We are not going to cover the *OSI* model (Open Systems Interconnect) in detail because it is material that is not going to be referenced much throughout this guide. I do recommend you review it here: [ISO 749801](https://www.ecma-international.org/activities/Communications/TG11/s020269e.pdf). If the above is confusing, please continue reading.
+For some of you, this section might feel somewhat repetitive. I still recommend you read through it to clear out any possible confusion. Plus, you might learn new things which is always important. The *Internet Protocol* or *IP* is a generic, standard _networking_ protocol designed to **carry** _transport_ protocol messages (called *Segments*) such as *TCP* and *UDP*. The *IP* protocol operates on Layer 3, the Network Layer of the OSI model. While other protocols such as *TCP* and *UDP* belong to Layer 4 of the OSI model, the Transport layer. We are not going to cover the *OSI* model (Open Systems Interconnect) in detail because it is material that is not going to be referenced much throughout this guide. I do recommend you review it here: [ISO 749801](https://www.ecma-international.org/activities/Communications/TG11/s020269e.pdf). If the above is confusing, please continue reading.
 
-Like we stated before, *IP* defines a standard protocol for _network_ communications, it is completely separate from *TCP* (one of the many transport protocols available), and it is formally specified in [RFC-791](https://tools.ietf.org/html/rfc791). So, why do people (and operating systems) commonly and sometimes interchangeably refer to the *IP* protocol as **TCP/IP** or the **TCP/IP stack**? The answer is not as strightforward as you might like it to be. *IP* and *TCP* are completely **different** things. *IP* and *TCP* are different protocol types, operating at different layers, and they are largely independent. **TCP/IP** is the **combination** of the 2 protocls, one on Layer 3 and one on Layer 4 and this combination is shopuld properly referred to as the *IP suite* because TCP is not the only transport protocol that IP can handle. The term **TCP/IP** is in use today because TCP is the main transport protocol used in IP. In short, **IP** is a networking protocol, the **IP Suite** is the combination of the IP networking protocol plus a number of transport protocols, and people refer to this **IP Suite** more commonly as **TCP/IP**. But TCP does not imply IP or viceversa. You can take a look at [all the transport level protocols IP supports here](https://en.wikipedia.org/wiki/List_of_IP_protocol_numbers).
+Like we stated before, *IP* defines a standard protocol for _network_ communications. It is completely separate from *TCP* (one of the many transport protocols available), and it is formally specified in [RFC-791](https://tools.ietf.org/html/rfc791). So, why do people (and operating systems) commonly and even interchangeably refer to the *IP* protocol as **TCP/IP** or the **TCP/IP stack**? The answer is not as strightforward as you might like it to be. *IP* and *TCP* are different protocol types, operating at different layers, and they are largely independent. **TCP/IP** is the **combination** of the 2 protocls, one on Layer 3 and one on Layer 4 and this combination is shopuld properly referred to as the *IP suite* instead because TCP is not the only transport protocol that IP can handle. The term **TCP/IP** is in use today because TCP is the original, and main transport protocol used in IP. In short, **IP** is a networking protocol, the **IP Suite** is the combination of the IP networking protocol plus a number of transport protocols, and people refer to this **IP Suite** more commonly as **TCP/IP**. But TCP does not imply IP or viceversa. You can take a look at [all the transport level protocols IP supports here](https://en.wikipedia.org/wiki/List_of_IP_protocol_numbers).
 
-So, let's cut to the chase. What is the difference between a _network_ protocol like *IP* and a _transport_ protocol like *TCP*? The transmission blocks of a **network** protocol contain data that specify how one computer reaches another in a network **PLUS** more data **containing** the blocks of a _transport_ protocol. The physical layer carries a stream of **bits**, making up **frames** at the data link layer. *Frames* contain **network packets** at the *network* level,  which in turn contain **transport** level protocol data called *Segments*. Here is a diagram showing the anatomy of *Frames*, *Packets* and *Segments*. These transmission blocks are also referred to as *PDU*s or *Protocol Data Units*.
+What is the difference between a _network_ protocol like *IP* and a _transport_ protocol like *TCP*? The transmission blocks of a **network** protocol contain data that specify source and destinatation computers in a network **PLUS** more data **containing** the blocks of a _transport_ protocol. The physical layer carries a stream of **bits**, making up **frames** at the data link layer. *Frames* contain **network packets** at the *network* level,  which in turn contain **transport** level protocol data called *Segments*. Here is a diagram showing the anatomy of *Frames*, *Packets* and *Segments*. These transmission blocks are also referred to as *PDU*s or *Protocol Data Units*.
 
 <img src="https://github.com/mariodivece/blog/blob/master/images/it-protocol-transmission-units.png?raw=true"></img>
 
@@ -29,12 +29,14 @@ But OSI model is not the only layer model out there. There are multiple models t
   <th>Layer</th>
   <th>OSI Model</th>
   <th>IP Model</th>
+  <th>Post Office Model</th>
 </thead>
 <tbody>
-	<tr>
+    <tr>
       <td>7</td>
       <td>Application</td>
       <td rowspan="3">Application: Higher level protocols such as FTP or HTTP</td>
+      <td rowspan="3">Literary content of a letter</td>
     </tr>
 	<tr>
       <td>6</td>
@@ -48,21 +50,25 @@ But OSI model is not the only layer model out there. There are multiple models t
       <td>4</td>
       <td>Transport</td>
       <td>Transport: IP Suite protocol such as TCP or UDP</td>
+      <td>Words and sentences in a letter</td>
     </tr>
 	<tr>
       <td>3</td>
       <td>Network</td>
       <td>Internet and Link layers. Packets within Frames</td>
+      <td>The sender and recipient of a letter</td>
     </tr>
 	<tr>
       <td>2</td>
       <td>Data Link</td>
       <td>Frames (not part of IP)</td>
+      <td>The ink and paper used to write the letter</td>
     </tr>
 	<tr>
       <td>1</td>
       <td>Physical</td>
       <td>Bits (not part of IP)</td>
+      <td>The courier company</td>
     </tr>
 </tbody>
 </table>
@@ -129,9 +135,9 @@ Subnet Masks:
  4. If a new networking specification came out in a few years, replacing *IPv4* does it mean that TCP applications would need to be rewritten? Why or Why not?
  5. 
 
-## Chapter 2: Firewalls and Routing
+## Chapter 2: Firewalls, Routing and WiFi
 
-In this chapter we will cover the notion of routing. It includes comcepts such as Network Address Translation, Gateways, Firewalls, and other means of establishing communications between computer systems.
+In this chapter we will cover the notion of routing. It includes comcepts such as Network Address Translation, Gateways, Firewalls, and other means of establishing communications between computer systems. We will also cover useful information regarding Wireless Networks and how to set them up properly.
 
 ### How Routers talk to each other
 
