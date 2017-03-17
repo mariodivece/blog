@@ -142,7 +142,8 @@ Subnet Masks:
      - Provide the total number of usable host addresses. 
      - Is ```10.59.129.0``` a valid, assignable IP address for a host? 
      - For the above response, explain why or why not?
-
+ 8. Can broadcast communication be accomplished using the *TCP* transport protocol? Why or why not?
+ 
 ## Chapter 2: Firewalls, Routing and WiFi
 
 In this chapter we will cover the notion of routing. It includes comcepts such as Network Address Translation, Gateways, Firewalls, and other means of establishing communications between computer systems. We will also cover useful information regarding Wireless Networks and how to set them up properly.
