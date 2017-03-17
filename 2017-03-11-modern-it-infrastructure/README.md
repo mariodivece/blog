@@ -133,14 +133,15 @@ Subnet Masks:
  4. What are the means the *IP* specification uses to ensure packets are delivered without corruption to the destination host?
  5. If a new networking specification came out in a few years, replacing *IPv4* does it mean that TCP applications would need to be rewritten? Why or Why not?
  6. Research: *TCP/IP* and *IP Suite* are equivalent terms. What is yet another sdynonym for these terms?
- 7. Exam Question: In te network: ```10.59.0.0/16``` 
-   - What is the Network Address.
-   - What is the Broadcast Address.
-   - What is the Netmask in IP Address notation. 
-   - Provide the total number of IP addresses.
-   - Provide the total number of usable host addresses. 
-   - Is ```10.59.129.0``` a valid, assignable IP address for a host? 
-   - For the above response, explain why or why not?
+ 7. Exam Question: For the network ```10.59.0.0/16```, answer the following questions 
+     - What is the Network Address?
+     - What is the Broadcast Address?
+     - What is the Netmask in standard IP Address notation?
+     - What is the Netmask in binary IP Address notation
+     - Provide the total number of IP addresses.
+     - Provide the total number of usable host addresses. 
+     - Is ```10.59.129.0``` a valid, assignable IP address for a host? 
+     - For the above response, explain why or why not?
 
 ## Chapter 2: Firewalls, Routing and WiFi
 
