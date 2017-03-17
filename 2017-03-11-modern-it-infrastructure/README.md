@@ -5,8 +5,7 @@
 Hello! Let me start by telling you about myself. I have been developing software for the better part of my life. Almost 20 years now. 
 I got my Electrical Engineering degree from the University of Alberta in 2006. I am a proud Mexican and I own a small software consultancy services firm called [Unosquare](https://www.unosquare.com).
 
-There are two reasons why I wanted to write this guide: First, I see that most software engineers, developers and even some IT people 
-simply don't have enough knowledge or the experience required to become productive fast enough in our quickly evolving industry. My hope is that I cover all the relevant material to make you, the reader, feel plenty confident at solving any problem you are presented with. Second, in addition to feeling the need of giving back a little by sharing my knowledge, I also wanted to keep notes and explanations on my own conclusions. So this guide will serve as a set of notes to myself too. I will not be using fancy language because I belive that it would ruin the purpose of these notes. Enjoy the read.
+There are two reasons why I wanted to write this guide: First, I see that most software engineers, developers and even some IT people simply don't have enough knowledge or the experience required to become productive fast enough in our quickly evolving industry. My hope is that I cover all the relevant material to make you, the reader, feel plenty confident at solving any problem you are presented with. Second, in addition to feeling the need of giving back a little by sharing my knowledge, I also wanted to keep notes and explanations on my own conclusions. So this guide will serve as a set of notes to myself too. I will not be using fancy language because I belive that it would ruin the purpose of these notes. Enjoy the read.
 
 ## Chapter 1: Networking Basics
 
@@ -25,52 +24,52 @@ What is the difference between a _network_ protocol like *IP* and a _transport_ 
 But OSI model is not the only layer model out there. There are multiple models that take extremely similar approaches with slightly different names. While the OSI model defines a 7 layer model to connect systems. The IP specification defines only 4 of them. Here is a table with a rough comparison. See [RFC-1122](https://tools.ietf.org/html/rfc1122) for additional reference.
 
 <table>
-<thead>
-  <th>Layer</th>
-  <th>OSI Model</th>
-  <th>IP Model</th>
-  <th>Post Office (fictional) Model</th>
-</thead>
-<tbody>
-    <tr>
-      <td>7</td>
-      <td>Application</td>
-      <td rowspan="3">Application: Higher level protocols such as FTP or HTTP</td>
-      <td rowspan="3">Literary content of a letter</td>
-    </tr>
-	<tr>
-      <td>6</td>
-      <td>Presentation</td>
-    </tr>
-	<tr>
-      <td>5</td>
-      <td>Session</td>
-    </tr>
-	<tr>
-      <td>4</td>
-      <td>Transport</td>
-      <td>Transport: IP Suite protocol such as TCP or UDP</td>
-      <td>Words and sentences in a letter</td>
-    </tr>
-	<tr>
-      <td>3</td>
-      <td>Network</td>
-      <td>Internet and Link layers. Packets within Frames</td>
-      <td>The sender and recipient of a letter</td>
-    </tr>
-	<tr>
-      <td>2</td>
-      <td>Data Link</td>
-      <td>Frames (not part of IP)</td>
-      <td>The ink and paper used to write the letter</td>
-    </tr>
-	<tr>
-      <td>1</td>
-      <td>Physical</td>
-      <td>Bits (not part of IP)</td>
-      <td>The courier company</td>
-    </tr>
-</tbody>
+   <thead>
+      <th>Layer</th>
+      <th>OSI Model</th>
+      <th>IP Model</th>
+      <th>Post Office (fictional) Model</th>
+   </thead>
+   <tbody>
+      <tr>
+         <td>7</td>
+         <td>Application</td>
+         <td rowspan="3">Application: Higher level protocols such as FTP or HTTP</td>
+         <td rowspan="3">Literary content of a letter</td>
+      </tr>
+      <tr>
+         <td>6</td>
+         <td>Presentation</td>
+      </tr>
+      <tr>
+         <td>5</td>
+         <td>Session</td>
+      </tr>
+      <tr>
+         <td>4</td>
+         <td>Transport</td>
+         <td>Transport: IP Suite protocol such as TCP or UDP</td>
+         <td>Words and sentences in a letter</td>
+      </tr>
+      <tr>
+         <td>3</td>
+         <td>Network</td>
+         <td>Internet and Link layers. Packets within Frames</td>
+         <td>The sender and recipient of a letter</td>
+      </tr>
+      <tr>
+         <td>2</td>
+         <td>Data Link</td>
+         <td>Frames (not part of IP)</td>
+         <td>The ink and paper used to write the letter</td>
+      </tr>
+      <tr>
+         <td>1</td>
+         <td>Physical</td>
+         <td>Bits (not part of IP)</td>
+         <td>The courier company</td>
+      </tr>
+   </tbody>
 </table>
 
 As you can see from the table above, it would be easy to map back and forth between layer models. So don't get into big debates about which model is correct. The value in all layered models lies within the ability to decouple, to the maximium possible extent the various protocols at the different layers they operate. This allows for new protocols to come to life, and existing protocols to evolve with little to no regard for protocols in layers below them. Check out this super interesting (partial) list of [popular protocols at the different OSI model layers](https://en.wikipedia.org/wiki/List_of_network_protocols_(OSI_model)). Also, note how *IPv4* and *IPv6* are both listed as Layer 3 protocols, the *IP Suite* (or *TCP/IP*) is listed as a Layer 3+4 protocol, and *TCP* and *UDP* are Layer 4 protocols.
