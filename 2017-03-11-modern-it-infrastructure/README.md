@@ -76,7 +76,7 @@ As you can see from the table above, it would be easy to map back and forth betw
 Fun Fact: the IP layer model is **older** than the OSI model. IP was introduced officially in 1982 (the year I was born!) and the OSI Model was published in 1984. But enough about layers! Let's take a look at the fundamental elements that are practical and relevant to us. What standard aspects of networking are defined by the *Internet Protocol*, or *IP*? Many, in fact. But you just need to deeply understand a few of them.
 
 - **Addresses**: It defines a way to represent network addresses, or more properly called, IP Addresses. Addresses are unique in a network and identify hosts. Hosts can have 1 or more IP addresses too.
-- **Packets**: It defines a transmission data structure with 2 basic parts. The first is called the *IP Header* whcih contains information about the source address, destination address, transport level protocol, and a number of other details. The second is the *IP Data* which contains the transport-level message (or payload) between senders and receivers. As a reminder of one of the previous sections, Packets themselves are part of the Network layer and are contained within Layer 2 (Link Layer of the OSI model) structures called *frames*. [More about the structure of IP packets is available here.](https://tools.ietf.org/html/rfc791#section-3.1). We will study *frames* when we get to switching.
+- **Packets**: It defines a transmission data structure with 2 basic parts. The first is called the *IP Header* whcih contains information about the source address, destination address, transport level protocol, and a number of other details. The second is the *IP Data* which contains the transport-level message (or payload) between senders and receivers. As a reminder of one of the previous sections, Packets themselves are part of the Network layer and are contained within Layer 2 (Link Layer of the OSI model) structures called *frames*. [More about the structure of IP packets is available here](https://tools.ietf.org/html/rfc791#section-3.1). We will study *frames* when we get to switching.
 - **Gateways**: Gateways or more porperly called **Routers**, are computers that map and know how to reach a number of addresses in the Internet or some other network on behalf of another host. A router allows other computers to send and receive packets to and from destinations thay can't really reach on their own (i.e. hosts outside of their local network). Routers typically reach their final destinations either directly, or by using other routers and that is how the entire Internet connects together: like a web of hosts behind routers connecting to each other. As a side note, a network *hop* occurs when a network packet passes through a router. Please visit [this site](http://www.vox.com/a/internet-maps) containing charts that will help you visualize how this works. And just for fun, try to use the ```tracert``` command to see how many hops (or routers) your computer needs to go through in order to reach google.com. Try:
 
 ``` 
@@ -133,7 +133,14 @@ Subnet Masks:
  4. What are the means the *IP* specification uses to ensure packets are delivered without corruption to the destination host?
  5. If a new networking specification came out in a few years, replacing *IPv4* does it mean that TCP applications would need to be rewritten? Why or Why not?
  6. Research: *TCP/IP* and *IP Suite* are equivalent terms. What is yet another sdynonym for these terms?
- 7. Exam Question: In te network: ```10.59.0.0/16``` what is the Network Address, the Broadcast Address, the Netmarsk in IP Address notation, provide the total number of IP addresses possible and provide the total number of usable host addresses. Finally, would the address ```10.59.129.0``` be a valid, assignable IP address for a host? Why or why not?
+ 7. Exam Question: In te network: ```10.59.0.0/16``` 
+   - What is the Network Address.
+   - What is the Broadcast Address.
+   - What is the Netmask in IP Address notation. 
+   - Provide the total number of IP addresses.
+   - Provide the total number of usable host addresses. 
+   - Is ```10.59.129.0``` a valid, assignable IP address for a host? 
+   - For the above response, explain why or why not?
 
 ## Chapter 2: Firewalls, Routing and WiFi
 
