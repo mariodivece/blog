@@ -143,7 +143,11 @@ Recall a subnet is a group of hosts sharing the same network address space. Unfo
 
 Example of a single subnet over multiple segments: This is one of the most common LAN setups for home networks. There typically will be a router provided by the ISP with a port providing Internet service, a few ethernet ports, and Wi-Fi capabilities. Devices connected to the ethernet ports are on the *ethernet* segment. Devices connected over Wi-Fi are on the Wi-Fi segment. And the line going from the router to the ISP is on a different segment. But note that both, devices connected via ethernet and devices connected via Wi-Fi will all share the same address space!
 
-Examples of multiple subnets over a signle segment: 
+Example of multiple subnets over a single segment: Not because hosts share the same bus (segment) it means that they must also share the same address space. You can have an ethernet switch and a few hosts connected to it. Then you can have some of those hosts configured with an address space such as ```10.24.2.0/24``` and some other hosts with an address space of ```10.36.1.0/24```. You would have 2 subnets over the same ethernet connection. 
+
+Example of multiple subnets over multiple segments: Take again the example of the typical home LAN setup. We already saw how the same subnet spans 2 segments: the ethernet and the Wi-Fi segment. Some of these home routers will have a feature called *guest network* that allows your guests to connect over Wi-Fi but prevent them from gaining access to your LAN's resources. This feature will run a new Wi-Fi segment, most likely with a different address space for the subnet.
+
+
 
 But what happens when a client wants to communicate directly with a different client? Turns o
 
