@@ -192,3 +192,22 @@ END;
 
 $$
 ```
+
+## 13. Finding Stale Projects
+
+This MySQL Query is to find projects that are not used anymore and need to be archived.
+```MYSQL
+SELECT
+      time_entries.project_id AS ProjectId
+    , projects.name AS ProjectName
+    , MAX(time_entries.spent_on) AS LastEntryDate
+    , datediff(curdate(), MAX(time_entries.spent_on)) AS DaysAgo
+FROM 
+    time_entries INNER JOIN projects ON time_entries.project_id = projects.id 
+WHERE 
+    projects.status = 1
+GROUP by
+    time_entries.project_id, projects.name
+ORDER BY
+    datediff(curdate(), MAX(time_entries.spent_on)) DESC;
+```
