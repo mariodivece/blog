@@ -3,7 +3,7 @@
 This guide covers basic administration tasks for a Windows Bitnami Redmine Installation and Upgrade steps.
 
 ## 1. Stop Services
- - Go to: C:\bitnami\redmine and run the ```manager-windows``` application
+ - Go to: ```c:\bitnami\redmine``` and run the ```manager-windows``` application
  - Stop all Services except for ```MySQL```
 
 ## 2. Backup your Database
