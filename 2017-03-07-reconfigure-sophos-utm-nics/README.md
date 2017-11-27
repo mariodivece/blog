@@ -16,11 +16,11 @@ Now enter ```sudo confd-client.plx```.
 ## Performing Configuration Changes
 
 The ```CLI``` is totally unsupported but it's easy to work with and navigate. It has several modes of operation. We are going to use the
-```OBJS``` Mode, so go ahead and type in ```OBJS``` and press ```Enter```You should see a message stating that you have entered ```OBJS``
+```OBJS``` Mode, so go ahead and type in ```OBJS``` and press ```Enter``` You should see a message stating that you have entered ```OBJS```
 mode.
 
 Now go ahead and hit the ```TAB``` key a couple of times. You should see a list of object categories with ```interface``` beign one of them.
-Type in ```interface``` and press ```Enter```. Tip: You don't have to type in the entire name. Typing the first few letters and hitting ```TAB``
+Type in ```interface``` and press ```Enter```. Tip: You don't have to type in the entire name. Typing the first few letters and hitting ```TAB```
 will show what your options are :).
 
 Go into the ```ethernet``` subcategory. and press ```TAB``` twice. It will list the existing object names. Identify the adapter that
@@ -32,4 +32,4 @@ name so it's able to assign it. You can change not only this setting but any oth
 enable the interface by typing: ```enable=1```.
 
 Finally, once you are done with your changes, you will need to write the changes: Siply enter ```w``` and ```Enter```. To exit the 
-CLI, just type in ```exit```. That's it! I hope it helps someone.
+CLI, just type in ```exit```. That's it! I hope this helps someone.
