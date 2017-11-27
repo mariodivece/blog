@@ -31,5 +31,5 @@ network adapter object appears empty!  I simply enter: ```itfhw=``` and ```TAB``
 name so it's able to assign it. You can change not only this setting but any other setting you wish in this same way. For example, you can
 enable the interface by typing: ```enable=1```.
 
-Finally, once you are done with your changes, you will need to write the changes: Siply enter ```w``` and ```Enter```. To exit the 
-CLI, just type in ```exit```. That's it! I hope this helps someone.
+Finally, once you are done with your changes, you will need to write the changes: Simply enter ```w``` and ```Enter```. This writes the configuration changes you just made.
+To exit the CLI, just type in ```exit```. That's it! I hope this helps someone.
