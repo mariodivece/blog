@@ -14,9 +14,85 @@ The goal of this tutorial is to build a Yocto Rocky image for the Raspberry Pi w
 - Netcat ```nc``` for streaming video if necessary
 
 ## Setting up the environment
-I am using Ubuntu 16 LTS for this build. Start by 
+I am using Ubuntu 16 LTS for this build. Start by installing some required packes
 ```bash
 sudo apt-get update
 sudo apt-get upgrade
-sudo apt-get install build-essential chrpath diffstat libncurses5-dev texinfo python2.7
+sudo apt-get install build-essential chrpath diffstat libncurses5-dev texinfo python2.7 git
+```
+
+Ensure ```/usr/bin/python``` is pointing to python 2.7
+```bash
+sudo ln -sf /usr/bin/python2.7 /usr/bin/python
+```
+
+For all versions of Ubuntu, you should change the default Ubuntu shell from dash to bash by running this command from a shell
+```bash
+sudo dpkg-reconfigure dash
+```
+
+Choose **No** when prompted. *You can change back to dash when you are done*
+
+## Get the required sources
+
+We will clone a few git repositories and setup a build directory with some default configuration files.
+
+```bash
+cd ~
+sudo su
+git clone -b rocko git://git.yoctoproject.org/poky.git poky-rocko
+cd poky-rocko
+git clone -b rocko git://git.openembedded.org/meta-openembedded
+git clone -b rocko git://git.yoctoproject.org/meta-security
+git clone -b rocko git://git.yoctoproject.org/meta-raspberrypi
+git clone -b rocko https://github.com/meta-qt5/meta-qt5
+cd ..
+mkdir rpi
+cd rpi
+git clone -b rocko git://github.com/jumpnow/meta-rpi
+mkdir build
+cd build
+mkdir conf
+cd ..
+cp meta-rpi/conf/local.conf.sample build/conf/local.conf
+cp meta-rpi/conf/bblayers.conf.sample build/conf/bblayers.conf
+```
+
+## Customize the Build
+We will now customize the default ```bblayers.conf``` file.
+
+```bash
+gedit build/conf/bblayers.conf
+```
+
+In ```bblayers.conf``` file replace ```${HOME}``` with the appropriate path to the meta-layer repositories on your system using absolute paths. This will save you a ton of headaches later. In my case, this is what my file looks like:
+```conf
+# POKY_BBLAYERS_CONF_VERSION is increased each time build/conf/bblayers.conf
+# changes incompatibly
+POKY_BBLAYERS_CONF_VERSION = "2"
+
+BBPATH = "${TOPDIR}"
+BBFILES ?= ""
+
+BBLAYERS ?= " \
+    /home/mario/poky-rocko/meta \
+    /home/mario/poky-rocko/meta-poky \
+    /home/mario/poky-rocko/meta-openembedded/meta-oe \
+    /home/mario/poky-rocko/meta-openembedded/meta-multimedia \
+    /home/mario/poky-rocko/meta-openembedded/meta-networking \
+    /home/mario/poky-rocko/meta-openembedded/meta-perl \
+    /home/mario/poky-rocko/meta-openembedded/meta-python \
+    /home/mario/poky-rocko/meta-qt5 \
+    /home/mario/poky-rocko/meta-raspberrypi \
+    /home/mario/poky-rocko/meta-security \
+    /home/mario/rpi/meta-rpi \
+"
+```
+
+**WARNING**: Do not include ```meta-yocto-bsp``` in your ```bblayers.conf```. The Yocto BSP requirements for the Raspberry Pi are in ```meta-raspberrypi```.
+
+Now, we will need to edit the ```rpi/build/conf/local.conf``` file.
+
+```bash
+gedit build/conf/local.conf 
 ```
