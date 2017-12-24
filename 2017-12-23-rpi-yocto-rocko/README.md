@@ -96,3 +96,9 @@ Now, we will need to edit the ```rpi/build/conf/local.conf``` file.
 ```bash
 gedit build/conf/local.conf 
 ```
+The variables you want to customize are the following:
+- MACHINE: This is the machine you want to build for. Only uncomment one line.
+- TMPDIR: I created the following folder: ```/home/mario/rpioe4/dl_dir```
+- DL_DIR: In my case" ```/home/mario/rpioe4/sstate_dir```
+- SSTATE_DIR: In my case: ```/home/mario/rpioe4/tmp_dir```
+
