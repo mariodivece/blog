@@ -1,14 +1,14 @@
 # Building a Yocto (Rocko) image for the Raspberry Pi
 
 The goal of this tutorial is to build a Yocto Rocky image for the Raspberry Pi with packages that allow for Mono (.NET) development. Basic tutorial was taken from [Building Raspberry Pi Systems with Yocto](http://www.jumpnowtek.com/rpi/Raspberry-Pi-Systems-with-Yocto.html). The goal is to create aminimal image with the following functionality:
-- WPA Supplicant for WiFi support
+- WPA Supplicant and WiFi support
 - Nano for text editing
 - Mono as a .NET Runtime
 - WiringPi Libraries for GPIO Access
 - raspi-config For Configuration
 - raspistill for taking pictures
 - raspivid for taking video
-- SSH Daemon for remote access
+- SSH Daemon ```openfor remote access
 - DHCP Client for automatic network configuration
 - A package manager, possibly ```apt-get```
 - Netcat ```nc``` for streaming video if necessary
@@ -18,7 +18,7 @@ I am using Ubuntu 16 LTS for this build. Start by installing some required packe
 ```bash
 sudo apt-get update
 sudo apt-get upgrade
-sudo apt-get install build-essential chrpath diffstat libncurses5-dev texinfo python2.7 git
+sudo apt-get install build-essential chrpath diffstat libncurses5-dev texinfo python2.7 git gawk
 ```
 
 Ensure ```/usr/bin/python``` is pointing to python 2.7
@@ -39,7 +39,6 @@ We will clone a few git repositories and setup a build directory with some defau
 
 ```bash
 cd ~
-sudo su
 git clone -b rocko git://git.yoctoproject.org/poky.git poky-rocko
 cd poky-rocko
 git clone -b rocko git://git.openembedded.org/meta-openembedded
@@ -94,11 +93,29 @@ BBLAYERS ?= " \
 Now, we will need to edit the ```rpi/build/conf/local.conf``` file.
 
 ```bash
+cd ..
+mkdir rpioe4
+cd rpioe4
+mkdir dl_dir
+mkdir sstate_dir
+mkdir tmp_dir
 gedit build/conf/local.conf 
 ```
-The variables you want to customize are the following:
+The variables you want to customize with absolute paths are the following:
 - MACHINE: This is the machine you want to build for. Only uncomment one line.
-- TMPDIR: I created the following folder: ```/home/mario/rpioe4/dl_dir```
+- TMPDIR: I created the following folder above: ```/home/mario/rpioe4/dl_dir```
 - DL_DIR: In my case" ```/home/mario/rpioe4/sstate_dir```
 - SSTATE_DIR: In my case: ```/home/mario/rpioe4/tmp_dir```
 
+Now you need to source the build by navigating to the base home directory. Specify an absolute path to the command which in my case was ```/home/mario/rpi/build```
+```bash
+cd ..
+source poky-rocko/oe-init-build-env /home/mario/rpi/build
+```
+
+## Customize and build an image!
+The folder ```rpi/meta-rpi/images``` contains a list of images you can use and modify according to your needs. In this case we will build the ```console-image```
+
+```bash
+bitbake console-image
+```
