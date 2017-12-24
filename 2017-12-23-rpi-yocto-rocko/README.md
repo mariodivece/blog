@@ -1,6 +1,6 @@
 # Building a Yocto (Rocko) image for the Raspberry Pi
 
-The goal of this tutorial is to build a Yocto Rocky image for the Raspberry Pi with packages that allow for Mono (.NET) development. Basic tutorial was taken from [Building Raspberry Pi Systems with Yocto](http://www.jumpnowtek.com/rpi/Raspberry-Pi-Systems-with-Yocto.html). The goal is to create aminimal image with the following functionality:
+The goal of this tutorial is to build a Yocto Rocky image for the Raspberry Pi with packages that allow for Mono (.NET) development. The original tutorial and a lot of the content was taken from the wonderful tutorial: [Building Raspberry Pi Systems with Yocto](http://www.jumpnowtek.com/rpi/Raspberry-Pi-Systems-with-Yocto.html). The goal is to create aminimal image with the following functionality:
 - WPA Supplicant and WiFi support
 - Nano for text editing
 - Mono as a .NET Runtime
@@ -99,13 +99,15 @@ cd rpioe4
 mkdir dl_dir
 mkdir sstate_dir
 mkdir tmp_dir
+cd ..
+cd rpi
 gedit build/conf/local.conf 
 ```
 The variables you want to customize with absolute paths are the following:
 - MACHINE: This is the machine you want to build for. Only uncomment one line.
-- TMPDIR: I created the following folder above: ```/home/mario/rpioe4/dl_dir```
-- DL_DIR: In my case" ```/home/mario/rpioe4/sstate_dir```
-- SSTATE_DIR: In my case: ```/home/mario/rpioe4/tmp_dir```
+- TMPDIR: I created the following folder above: ```/home/mario/rpioe4/tmp_dir```
+- DL_DIR: In my case" ```/home/mario/rpioe4/dl_dir```
+- SSTATE_DIR: In my case: ```/home/mario/rpioe4/sstate_dir```
 
 Now you need to source the build by navigating to the base home directory. Specify an absolute path to the command which in my case was ```/home/mario/rpi/build```
 ```bash
@@ -118,4 +120,135 @@ The folder ```rpi/meta-rpi/images``` contains a list of images you can use and m
 
 ```bash
 bitbake console-image
+```
+
+In my case it took about 90 minutes to fetch and build all packages on an Intel i7-6700K @ 4.20 GHz, 16GB RAM and a 500 Mbit Internet connection.
+
+### Troubleshooting Builds
+
+You may occasionally run into build errors related to packages that either failed to download or sometimes out of order builds. The easy solution is to clean the failed package and rerun the build again. For instance if the build for ```zip``` failed for some reason, I would run this:
+
+```bash
+~/rpi/build$ bitbake -c cleansstate zip
+~/rpi/build$ bitbake zip
+```
+
+And then continue with the full build.
+
+```bash
+~/rpi/build$ bitbake console-image
+```
+
+Note: The bitbake ```cleansstate``` command (with two s) works for image recipes as well. The image files won’t get deleted from the ```TMPDIR``` until the next time you build.
+
+## Deploying the Resulting Image
+
+After the build completes, the bootloader, kernel and rootfs image files can be found in ```/deploy/images/$MACHINE``` with ```MACHINE``` coming from your ```local.conf```.
+
+The ```meta-rpi/scripts``` directory has some helper scripts to format and copy the files to a microSD card. The ```mk2parts.sh``` script will partition an SD card with the minimal 2 partitions required for the RPI.
+
+### Creating the required Partitions on the SD Card
+
+Insert the microSD into your workstation and note where it shows up. ```lsblk``` is convenient for finding the microSD card.
+In my case my SD card shows as ```sdb```. It doesn’t matter if some partitions from the SD card are mounted. The ```mk2parts.sh``` script will unmount them.
+
+**WARNING**: This script will format any disk on your workstation so make sure you choose the SD card.
+```bash
+~$ cd ~/rpi/meta-rpi/scripts
+~/rpi/meta-rpi/scripts$ sudo ./mk2parts.sh sdb
+```
+Temporary mount point: You will need to create a temporary mount point on your workstation for the copy scripts to use. The default is
+```bash
+~$ sudo mkdir /media/card
+```
+
+### Copying the contents of the Boot Partition to the SD Card
+
+If you don’t want that location, you will have to edit the following scripts to use the mount point you choose" ```copy_boot.sh```. This script copies the GPU firmware, the Linux kernel, dtbs and overlays, ```config.txt``` and ```cmdline.txt``` to the boot partition of the SD card. This copy_boot.sh script needs to know the ```TMPDIR``` to find the binaries. It looks for an environment variable called ```OETMP```.
+
+For instance, if I had this in ```build/conf/local.conf```: ```TMPDIR = "/home/mario/rpioe4/tmp_dir"``` Then I would export this environment variable before running ```copy_boot.sh```
+
+```bash
+export OETMP=/home/mario/rpioe4/tmp_dir
+```
+
+The ```copy_boot.sh``` script also needs a ```MACHINE``` environment variable specifying the type of RPi board.
+
+```bash
+export MACHINE=raspberrypi2
+```
+
+Now you can run the script:
+```bash
+~/rpi/meta-rpi/scripts$ ./copy_boot.sh sdb
+```
+
+This script should run very fast. If you want to customize the ```config.txt``` or ```cmdline.txt``` files for the system, you can place either of those files in the ```meta-rpi/scripts``` directory and the ```copy_boot.sh``` script will copy them as well. Take a look at the script if this is unclear.
+
+### Copying the contents of the Root File System to the SD Card
+
+The ```copy_rootfs.sh``` script copies the root file system to the second partition of the SD card.
+It also needs the same ```OETMP``` and ```MACHINE``` environment variables. The script accepts an optional command line argument for the image type, for example console or ```qt5```. The default is ```console``` if no argument is provided. The script also accepts a ```hostname``` argument if you want the host name to be something other then the default ```MACHINE```.
+
+Here’s an example of how you would run ```copy_rootfs.sh```
+```bash
+./copy_rootfs.sh sdb console
+```
+or:
+```bash
+./copy_rootfs.sh sdb qt5 rpi3
+```
+
+## Adding Additional Packages!
+
+To display the list of available recipes from the ```meta-layers``` included in ```bblayers.conf```:
+```bash
+source poky-rocko/oe-init-build-env ~/rpi/build
+bitbake -s
+```
+
+Once you have the recipe name, you need to find what packages the recipe produces. Use the ```oe-pkgdata-util``` utility for this.
+```bash
+~/rpi/build$ oe-pkgdata-util list-pkgs -p openssh
+openssh-keygen
+openssh-scp
+openssh-ssh
+openssh-sshd
+openssh-sftp
+openssh-misc
+openssh-sftp-server
+openssh-dbg
+openssh-dev
+openssh-doc
+openssh
+```
+These are the individual packages you could add to your image recipe. You can also use ```oe-pkgdata-util``` to check the individual files a package will install.
+
+For instance, to see the files for the ```openssh-sshd package```
+```bash
+~/rpi/build$ oe-pkgdata-util list-pkg-files openssh-sshd
+openssh-sshd:
+        /etc/default/volatiles/99_sshd
+        /etc/init.d/sshd
+        /etc/ssh/moduli
+        /etc/ssh/sshd_config
+        /etc/ssh/sshd_config_readonly
+        /usr/libexec/openssh/sshd_check_keys
+        /usr/sbin/sshd
+```
+
+For a package to be installed in your image it has to get into the ```IMAGE_INSTALL``` variable some way or another. See the example image recipes for some common conventions.
+
+## Using the Raspberry Pi Camera Module
+
+The raspicam command line tools are installed with the ```console-image``` or any image that includes the ```console-image```
+- ```raspistill```
+- ```raspivid```
+- ```raspiyuv```
+
+To enable the RPi camera, add or edit the following in the RPi configuration file ```config.txt```
+```
+start_x=1
+gpu_mem=128
+disable_camera_led=1   # optional for disabling the red LED on the camera
 ```
