@@ -1,15 +1,13 @@
 # Building a Yocto (Rocko) image for the Raspberry Pi
 
 The goal of this tutorial is to build a Yocto Rocky image for the Raspberry Pi with packages that allow for Mono (.NET) development. The original tutorial and a lot of the content was taken from the wonderful tutorial: [Building Raspberry Pi Systems with Yocto](http://www.jumpnowtek.com/rpi/Raspberry-Pi-Systems-with-Yocto.html). The goal is to create aminimal image with the following functionality:
-- WPA Supplicant and WiFi support
+- WiFi and wired network support
 - Nano for text editing
 - Mono as a .NET Runtime
-- WiringPi Libraries for GPIO Access
 - raspi-config For Configuration
 - raspistill for taking pictures
 - raspivid for taking video
-- SSH Daemon ```openfor remote access
-- DHCP Client for automatic network configuration
+- SSH Daemon ```openssh``` and SFTP for remote access and file deployment
 - A package manager, possibly ```apt-get```
 - Netcat ```nc``` for streaming video if necessary
 
