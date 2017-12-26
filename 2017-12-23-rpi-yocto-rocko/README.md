@@ -2,8 +2,9 @@
 
 The goal of this tutorial is to build a Yocto Rocky image for the Raspberry Pi with packages that allow for Mono (.NET) development. The original tutorial and a lot of the content was taken from the wonderful tutorial: [Building Raspberry Pi Systems with Yocto](http://www.jumpnowtek.com/rpi/Raspberry-Pi-Systems-with-Yocto.html). The goal is to create aminimal image with the following functionality:
 - WiFi and wired network support
-- Nano for text editing
+- Nano for quick text editing
 - Mono as a .NET Runtime
+- Chromium in Kiosk mode startup and without X11
 - raspi-config For Configuration
 - raspistill for taking pictures
 - raspivid for taking video
