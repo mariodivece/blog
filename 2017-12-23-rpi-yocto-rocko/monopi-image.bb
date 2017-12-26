@@ -38,6 +38,7 @@ QT5_PKGS = " \
     qtwebsockets-qmlplugins \
     qtvirtualkeyboard \
     qtxmlpatterns \
+    qtwebkit \
 "
 
 QML_APPS = " \
