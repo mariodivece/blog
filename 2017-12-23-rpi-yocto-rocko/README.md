@@ -1,16 +1,37 @@
 # Building a Yocto (Rocko) image for the Raspberry Pi
 
-The goal of this tutorial is to build a Yocto Rocky image for the Raspberry Pi with packages that allow for Mono (.NET) development. The original tutorial and a lot of the content was taken from the wonderful tutorial: [Building Raspberry Pi Systems with Yocto](http://www.jumpnowtek.com/rpi/Raspberry-Pi-Systems-with-Yocto.html). The goal is to create aminimal image with the following functionality:
+The objective today is to build a Yocto Rocky image for the Raspberry Pi with packages that allow for Mono (.NET) development. The original tutorial and a lot of the content was taken from the wonderful tutorial: [Building Raspberry Pi Systems with Yocto](http://www.jumpnowtek.com/rpi/Raspberry-Pi-Systems-with-Yocto.html). The goal is to create aminimal image with the following functionality:
 - WiFi and wired network support
 - Nano for quick text editing
 - Mono as a .NET Runtime
-- Chromium in Kiosk mode startup and without X11
-- raspi-config For Configuration
-- raspistill for taking pictures
-- raspivid for taking video
+- A WebKit-based browser in Kiosk mode (maybe we'll need to build one with Qt)
+- ```raspistill``` for taking pictures
+- ```raspivid``` for taking video
 - SSH Daemon ```openssh``` and SFTP for remote access and file deployment
-- A package manager, possibly ```apt-get```
+- A package manager, possibly ```opkg```
 - Netcat ```nc``` for streaming video if necessary
+
+*Note: The recipes in ```meta-rpi``` were taken from https://github.com/jumpnow/meta-rpi*
+
+## Overview
+I have created 2 scripts: ```build.sh``` and ```deploy.sh```. The rest of the files you can modify to build your own Raspberry Pi image. As a build system I am using Ubuntu 16.04 LTS x64. Please not you will need a lot of the following to build images:
+- RAM: I recommend a minimum of 12GB (yes, that's right, twelve). Otherwise I the build process fails on some packages.
+- CPU: At least a modern, 4-core CPU. Building images takes quite a long time. Expect hours of absolute fun!
+- Disk: You will need plenty of disk spece. Make sure you have around 100GB (one hunderd) of free space
+
+## Customizing the image
+
+In Yocto, ```layers``` preovide a set of ```recipes``` which build ```packages```. A Yocto image is 
+
+The first thing you need to do is enable execution of the build and deploy bash scripts:
+
+```bash
+chmod u+x build.sh
+chmod u+x deploy.sh
+```
+
+
+
 
 ## Stuff to do after we are done
 
