@@ -12,6 +12,36 @@ The goal of this tutorial is to build a Yocto Rocky image for the Raspberry Pi w
 - A package manager, possibly ```apt-get```
 - Netcat ```nc``` for streaming video if necessary
 
+## Stuff to do after we are done
+
+### Login
+Username: ```root```
+Password: ```monopi```
+
+### Configure WiFi
+
+Uncomment the line ```aut0 wlan0```
+```bash
+nano /etc/network/interfaces
+```
+
+Now configure the WiFi interface:
+```bash
+nano /etc/wpa_supplicant.conf
+```
+
+### Configure Autologin
+
+Edit the file as follows: ```nano /etc/inittab```
+Towards the bottom of the file comment the line: ```#1:2345:respawn:/sbin/getty 38400 tty1```
+And add the line: ```1:2345:respawn:/bin/login -f rfid tty1 </dev/tty1 >/dev/tty1 2>&1```
+
+### Running a startup program:
+
+```bash
+
+```
+
 ## Setting up the environment
 I am using Ubuntu 16 LTS for this build. Start by installing some required packes
 ```bash
