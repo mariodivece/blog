@@ -94,6 +94,13 @@ if [ $PromptResult -ne 0 ]; then
 		git clone -b rocko git://git.yoctoproject.org/meta-raspberrypi;
 		git clone -b rocko https://github.com/meta-qt5/meta-qt5;
 		
+		# Checkout specific commit of the meta-browser recipes		
+		#git clone -b master https://github.com/OSSystems/meta-browser;
+		#cd meta-browser
+		#git checkout 8cc24caa56f254e09ccb2311b59d054d1f016014
+		#cd ..
+		
+		# Checkout mono for the rocko branch
 		cd meta-openembedded;
 		git clone -b rocko git://git.yoctoproject.org/meta-mono;
 		cd ${BasePath};
@@ -102,7 +109,7 @@ if [ $PromptResult -ne 0 ]; then
 	fi
 fi
 
-PromptYesOrNo "5. Clone Jumpnow RPI recipe?";
+PromptYesOrNo "5. Clone Jumpnow RPI recipes?";
 if [ $PromptResult -ne 0 ]; then
 	if [ ! -d "${BasePath}/rpi" ]; then	
 		cd ${BasePath};
@@ -130,23 +137,33 @@ if [ $PromptResult -ne 0 ]; then
 		mkdir sstate-cache;
 	fi
 	
-		if [ ! -d "${BasePath}/tmp-rocko" ]; then
+	if [ ! -d "${BasePath}/tmp-rocko" ]; then
 		mkdir tmp-rocko;
 	fi	
 
 	cp "${BasePath}/local.conf" "${BasePath}/rpi/build/conf/local.conf"
 	cp "${BasePath}/bblayers.conf" "${BasePath}/rpi/build/conf/bblayers.conf"
 	cp "${BasePath}/monopi-image.bb" "${BasePath}/rpi/meta-rpi/images/monopi-image.bb"
+	#cp "${BasePath}/chromium-gn.inc" "${BasePath}/poky-rocko/meta-browser/recipes-browser/chromium/chromium-gn.inc"
 fi
 
 PromptYesOrNo "7. Build the MonoPi Image?";
 if [ $PromptResult -ne 0 ]; then
 	cd ${BasePath};
 	source "${BasePath}/poky-rocko/oe-init-build-env" "${BasePath}/rpi/build";
-	bitbake -c clean monopi-image
-	bitbake monopi-image
+	
+	# Troubleshooting: Sometimes image building fails because of low memory or out of order builds.
+	# The solution is to attempt individual package building with bitbake PACKAGENAME
+	#bitbake -c cleansstate monopi-image
+	#bitbake boost;
+	#bitbake binutils;
+	#bitbake qtbase;
+	#bitbake qt3d;
+	#bitbake qtcharts;
+	#bitbake qtvirtualkeyboard;
+
+	bitbake monopi-image;
 fi
 
 echo "All tasks done.";
-
 
