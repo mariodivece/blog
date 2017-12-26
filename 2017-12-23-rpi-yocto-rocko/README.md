@@ -33,14 +33,26 @@ nano /etc/wpa_supplicant.conf
 ### Configure Autologin
 
 Edit the file as follows: ```nano /etc/inittab```
-Towards the bottom of the file comment the line: ```#1:2345:respawn:/sbin/getty 38400 tty1```
-And add the line: ```1:2345:respawn:/bin/login -f rfid tty1 </dev/tty1 >/dev/tty1 2>&1```
+Towards the bottom of the file comment the line: 
+```
+#1:12345:respawn:/sbin/getty 38400 tty1
+```
+And add the line: 
+```
+1:12345:respawn:/bin/login -f root tty1 </dev/tty1 >/dev/tty1 2>&1
+```
 
 ### Running a startup program:
 
-```bash
+Create a script that starts your app: ```nano /etc/profile```
 
+towards the end of the file add (nte the ampersand at the end of the program call):
+```bash
+qqtest &
 ```
+
+or via runlevels:
+http://www.armadeus.org/wiki/index.php?title=Automatically_launch_your_application
 
 ## Setting up the environment
 I am using Ubuntu 16 LTS for this build. Start by installing some required packes
@@ -48,6 +60,16 @@ I am using Ubuntu 16 LTS for this build. Start by installing some required packe
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install build-essential chrpath diffstat libncurses5-dev texinfo python2.7 git gawk
+```
+
+## Disabling IPv6
+```nano /etc/sysctl.conf```
+at the end of the file add:
+```
+# Disable IPv6
+net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+net.ipv6.conf.lo.disable_ipv6 = 1
 ```
 
 Ensure ```/usr/bin/python``` is pointing to python 2.7
