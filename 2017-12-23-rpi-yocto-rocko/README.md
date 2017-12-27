@@ -188,7 +188,7 @@ The variables you want to customize with absolute paths are the following:
 Now you need to source the build by navigating to the base home directory. Specify an absolute path to the command which in my case was ```/home/mario/rpi/build```
 ```bash
 cd ..
-source poky-rocko/oe-init-build-env /home/mario/rpi/build
+source poky-rocko/oe-init-build-env rpi/build
 ```
 
 ## Customize and build an image!
@@ -279,7 +279,7 @@ or:
 
 To display the list of available recipes from the ```meta-layers``` included in ```bblayers.conf```:
 ```bash
-source poky-rocko/oe-init-build-env ~/rpi/build
+source poky-rocko/oe-init-build-env rpi/build
 bitbake -s
 ```
 
@@ -311,6 +311,21 @@ openssh-sshd:
         /etc/ssh/sshd_config_readonly
         /usr/libexec/openssh/sshd_check_keys
         /usr/sbin/sshd
+```
+
+You can also list all available recipes via:
+```bash
+bitbake-layers show-recipes
+```
+
+Or, show the layers (and its packages) of your current bblayers:
+```bash
+bitbake-layers show-layers
+```
+
+Or, list all packages that will be built by the given image:
+```bash
+bitbake -g [package] && cat pn-depends.dot | grep -v -e '-native' | grep -v digraph | grep -v -e '-image' | awk '{print $1}' | sort | uniq
 ```
 
 For a package to be installed in your image it has to get into the ```IMAGE_INSTALL``` variable some way or another. See the example image recipes for some common conventions.
