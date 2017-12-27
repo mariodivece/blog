@@ -30,6 +30,7 @@ QT5_PKGS = " \
     qtdeclarative-plugins \
     qtdeclarative-qmlplugins \
     qtgraphicaleffects \
+    qtlocation-plugins \
     qtmultimedia \
     qtquickcontrols2 \
     qtsensors-plugins \
@@ -39,6 +40,8 @@ QT5_PKGS = " \
     qtvirtualkeyboard \
     qtxmlpatterns \
     qtwebkit \
+    qtwebengine \
+    qttools \
 "
 
 QML_APPS = " \
