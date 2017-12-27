@@ -69,7 +69,7 @@ PromptYesOrNo "1. Check dependencies are installed?";
 if [ $PromptResult -ne 0 ]; then
 	sudo apt-get update;
 	sudo apt-get upgrade;
-	sudo apt-get install build-essential chrpath diffstat libncurses5-dev texinfo python2.7 git gawk gcc-multilib;
+	sudo apt-get install build-essential chrpath diffstat libncurses5-dev texinfo python2.7 git gawk gcc-multilib g++-multilib;
 fi
 
 PromptYesOrNo "2. Point /usr/bin/python to Python 2.7?"; 
