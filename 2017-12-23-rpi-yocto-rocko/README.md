@@ -327,6 +327,7 @@ Or, list all packages that will be built by the given image:
 ```bash
 bitbake -g [package] && cat pn-depends.dot | grep -v -e '-native' | grep -v digraph | grep -v -e '-image' | awk '{print $1}' | sort | uniq
 ```
+You can check out more useful commands here: https://elinux.org/Bitbake_Cheat_Sheet
 
 For a package to be installed in your image it has to get into the ```IMAGE_INSTALL``` variable some way or another. See the example image recipes for some common conventions.
 
