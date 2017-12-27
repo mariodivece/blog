@@ -4,7 +4,7 @@ The objective today is to build a Yocto Rocky image for the Raspberry Pi with pa
 - WiFi and wired network support
 - Nano for quick text editing
 - Mono as a .NET Runtime
-- A WebKit-based browser in Kiosk mode (maybe we'll need to build one with Qt)
+- Chromium browser in EGLFS in Kiosk mode
 - ```raspistill``` for taking pictures
 - ```raspivid``` for taking video
 - SSH Daemon ```openssh``` and SFTP for remote access and file deployment
