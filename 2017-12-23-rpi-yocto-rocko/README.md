@@ -13,6 +13,8 @@ The objective today is to build a Yocto image for the Raspberry Pi with packages
 
 *Note: The recipes in ```meta-rpi``` were taken from the awesome repo: https://github.com/jumpnow/meta-rpi*
 
+<img src="https://raw.githubusercontent.com/mariodivece/blog/master/images/rpi-yocto.jpg"></img>
+
 ## Overview
 Basically, I have created 2 scripts: ```build.sh``` and ```deploy.sh``` and some files alowng with a very small web browser. As a build system I am using Ubuntu 16.04 LTS x64. Please note you will need a lot of the following to build images:
 - RAM: LOTS of it. I recommend some 24GB (yes, that's right). Otherwise the build process fails on some packages.
