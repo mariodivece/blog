@@ -12,6 +12,7 @@ The objective today is to build a Yocto image for the Raspberry Pi with packages
 - ```omxplayer``` as a media player for the RPi
 - ```opkg``` as a package manager
 - ```nc``` (Netcat) for streaming video if necessary
+- SPI, I2C, UART and GPIO support (these should work with WiringPi)
 
 *Note: The recipes in ```meta-rpi``` were taken from the awesome repo: https://github.com/jumpnow/meta-rpi*
 
