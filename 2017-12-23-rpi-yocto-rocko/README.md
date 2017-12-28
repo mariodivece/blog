@@ -4,7 +4,7 @@ The objective today is to build a Yocto image for the Raspberry Pi with packages
 - WiFi and wired network support
 - ```nano``` for quick text editing
 - Mono 5+ as a .NET Runtime
-- ```nanoweb``` my own little WebKit based browser with EGLFS, Kiosk mode and virtual keyboard support
+- ```nanoweb``` my own little QtWebEngine (Qt 5.9) based browser with EGLFS, Kiosk mode and virtual keyboard support
 - ```raspistill``` for taking pictures
 - ```raspivid``` for taking video
 - ```openssh``` for SSH and SFTP support
