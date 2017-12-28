@@ -8,6 +8,8 @@ The objective today is to build a Yocto image for the Raspberry Pi with packages
 - ```raspistill``` for taking pictures
 - ```raspivid``` for taking video
 - ```openssh``` for SSH and SFTP support
+- ```ffmpeg``` for media stream processing
+- ```omxplayer``` as a media player for the RPi
 - ```opkg``` as a package manager
 - ```nc``` (Netcat) for streaming video if necessary
 
