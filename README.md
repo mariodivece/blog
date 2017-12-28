@@ -5,8 +5,9 @@ A repository with technical tips, notes and some code
 
 [![Analytics](https://ga-beacon.appspot.com/UA-8535255-2/mariodivece/blog/)](https://github.com/igrigorik/ga-beacon)
 
+Besides the blog posts listed below, I have a small guide (still work in progress) available here:
 
-WIP: <a href="https://github.com/mariodivece/blog/tree/master/2017-03-11-modern-it-infrastructure">Modern IT Infrastructure: A Practical Guide</a>
+**<a href="https://github.com/mariodivece/blog/tree/master/2017-03-11-modern-it-infrastructure">Modern IT Infrastructure: A Practical Guide</a>**
 
 | Date | Entry | Categories |
 |------|-------|------------|
