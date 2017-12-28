@@ -77,6 +77,12 @@ And add the line:
 1:12345:respawn:/bin/login -f root tty1 </dev/tty1 >/dev/tty1 2>&1
 ```
 
+### Adjusting QT to your display
+
+```bash
+nano /etc/profile.d/qt5-env.sh
+```
+
 ### Running a startup program:
 
 Create a script that starts your app: ```nano /etc/profile```
