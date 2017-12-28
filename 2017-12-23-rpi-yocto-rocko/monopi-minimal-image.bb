@@ -9,7 +9,7 @@ inherit core-image
 
 DEPENDS += "bcm2835-bootfiles"
 
-ORE_OS = " \
+CORE_OS = " \
     openssh openssh-keygen openssh-sftp-server \
     term-prompt \
     tzdata \
