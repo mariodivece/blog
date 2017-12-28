@@ -1,5 +1,7 @@
 # Working with the fantastic Trinket M0
 
+<img src="https://raw.githubusercontent.com/mariodivece/blog/master/images/trinket-m0.jpeg"></img>
+
 I fixed the default code for ```main.py``` to make it more readable
 ```python
 """
