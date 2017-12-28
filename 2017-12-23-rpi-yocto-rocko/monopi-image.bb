@@ -57,6 +57,7 @@ IMAGE_INSTALL += " \
     ${QT5_PKGS} \
     ${QML_APPS} \
     mono \
+    nanoweb \
 "
 
 export IMAGE_BASENAME = "monopi-image"

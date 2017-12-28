@@ -120,6 +120,11 @@ if [ $PromptResult -ne 0 ]; then
 		cd build;
 		mkdir conf;
 		cd ${BasePath};
+		# Inject the nanoweb recipe!
+		mkdir -p "${BasePath}/rpi/meta-rpi/recipes-qt/nanoweb/files"
+		cp "nanoweb_fs.bb" "${BasePath}/rpi/meta-rpi/recipes-qt/nanoweb/nanoweb_fs.bb"
+		cp "nanoweb.tar.gz" "${BasePath}/rpi/meta-rpi/recipes-qt/nanoweb/files/nanoweb.tar.gz"
+		cd ${BasePath};
 	else
 		echo -e "Directory '${BasePath}/rpi' already exists. Skipping."
 	fi
@@ -166,4 +171,3 @@ if [ $PromptResult -ne 0 ]; then
 fi
 
 echo "All tasks done.";
-
