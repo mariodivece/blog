@@ -15,3 +15,5 @@ WIP: <a href="https://github.com/mariodivece/blog/tree/master/2017-03-11-modern-
 | 2017-02-17 | <a href="https://github.com/mariodivece/blog/tree/master/2017-02-17-sql-azure-session-state">ASP.NET Session State with SQL Azure</a> | C#, Programming, Azure |
 | 2017-03-07 | <a href="https://github.com/mariodivece/blog/tree/master/2017-03-07-reconfigure-sophos-utm-nics">Configure Sophos UTM NICs via the CLI</a> | Sophos UTM, Infrastructure, Linux |
 | 2017-11-27 | <a href="https://github.com/mariodivece/blog/tree/master/2017-11-27-redmine-mainetenance-guide">A Small Redmine Maintenance Guide</a> | Redmine, Web Apps, Bitnami |
+| 2017-12-21 | <a href="https://github.com/mariodivece/blog/tree/master/2017-12-21-the-trinket-m0">Working with the fantastic Trinket M0</a> | Embedded, Electronics |
+| 2017-12-23 | <a href="https://github.com/mariodivece/blog/tree/master/2017-12-23-rpi-yocto-rocko">A proper Yocto image for the Raspberry Pi</a> | Embedded, Electronics, Yocto |
