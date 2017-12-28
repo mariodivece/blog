@@ -3,12 +3,12 @@
 The objective today is to build a Yocto image for the Raspberry Pi with packages that allow for Mono (.NET) development. The original tutorial and a lot of the content was taken from the wonderful tutorial: [Building Raspberry Pi Systems with Yocto](http://www.jumpnowtek.com/rpi/Raspberry-Pi-Systems-with-Yocto.html). The goal is to create aminimal image with the following functionality:
 - WiFi and wired network support
 - ```nano``` for quick text editing
-- Mono 5+ as a .NET Runtime
+- Mono 5.4+ as a .NET Runtime
 - ```nanoweb``` my own little QtWebEngine (Qt 5.9) based browser with EGLFS, Kiosk mode and virtual keyboard support
 - ```raspistill``` for taking pictures
 - ```raspivid``` for taking video
 - ```openssh``` for SSH and SFTP support
-- ```opkg``` as a ackage manager
+- ```opkg``` as a package manager
 - ```nc``` (Netcat) for streaming video if necessary
 
 *Note: The recipes in ```meta-rpi``` were taken from the awesome repo: https://github.com/jumpnow/meta-rpi*
@@ -179,4 +179,8 @@ bitbake -g [package] && cat pn-depends.dot | grep -v -e '-native' | grep -v digr
 ```
 You can check out more useful commands here: https://elinux.org/Bitbake_Cheat_Sheet
 
+## TODOs
 
+- Remove unused Qt libraries and plugins
+- Remove unused C++ compilers
+- Minimize the overall image size
