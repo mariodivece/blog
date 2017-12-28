@@ -1,23 +1,23 @@
 # Building a Yocto (Rocko) image for the Raspberry Pi
 
-The objective today is to build a Yocto Rocky image for the Raspberry Pi with packages that allow for Mono (.NET) development. The original tutorial and a lot of the content was taken from the wonderful tutorial: [Building Raspberry Pi Systems with Yocto](http://www.jumpnowtek.com/rpi/Raspberry-Pi-Systems-with-Yocto.html). The goal is to create aminimal image with the following functionality:
+The objective today is to build a Yocto image for the Raspberry Pi with packages that allow for Mono (.NET) development. The original tutorial and a lot of the content was taken from the wonderful tutorial: [Building Raspberry Pi Systems with Yocto](http://www.jumpnowtek.com/rpi/Raspberry-Pi-Systems-with-Yocto.html). The goal is to create aminimal image with the following functionality:
 - WiFi and wired network support
-- Nano for quick text editing
-- Mono as a .NET Runtime
-- Nanoweb my own little WebKit based browser with EGLFS, Kiosk mode and virtual keyboard support
+- ```nano``` for quick text editing
+- Mono 5+ as a .NET Runtime
+- ```nanoweb``` my own little WebKit based browser with EGLFS, Kiosk mode and virtual keyboard support
 - ```raspistill``` for taking pictures
 - ```raspivid``` for taking video
 - ```openssh``` for SSH and SFTP support
-- A package manager, possibly ```opkg```
-- Netcat ```nc``` for streaming video if necessary
+- ```opkg``` as a ackage manager
+- ```nc``` (Netcat) for streaming video if necessary
 
-*Note: The recipes in ```meta-rpi``` were taken from https://github.com/jumpnow/meta-rpi*
+*Note: The recipes in ```meta-rpi``` were taken from the awesome repo: https://github.com/jumpnow/meta-rpi*
 
 ## Overview
-I have created 2 scripts: ```build.sh``` and ```deploy.sh```. The rest of the files you can modify to build your own Raspberry Pi image. As a build system I am using Ubuntu 16.04 LTS x64. Please note you will need a lot of the following to build images:
+Basically, I have created 2 scripts: ```build.sh``` and ```deploy.sh``` and some files alowng with a very small web browser. As a build system I am using Ubuntu 16.04 LTS x64. Please note you will need a lot of the following to build images:
 - RAM: LOTS of it. I recommend some 24GB (yes, that's right). Otherwise the build process fails on some packages.
 - CPU: At least a modern, 4-core CPU. Building images takes quite a long time. Expect hours of absolute fun!
-- Disk: You will need plenty of disk spece. Make sure you have around 100GB of free space
+- Disk: You will need plenty of disk space. Make sure you have around 100GB of free space
 
 ## Instructions
 
@@ -43,14 +43,17 @@ If all succeeds you can now deoply your image to an SD card. Insert that SD card
 
 ## Additional Tasks and Configuration
 
-### Login
-Username: ```root```
+Once you deploy your image, here is some stuff ou may want to do.
 
+### Login
+
+The default credentials are the following:
+Username: ```root```
 Password: ```monopi```
 
 ### Configure WiFi
 
-Uncomment the line ```aut0 wlan0```
+Uncomment the line (remove the ```#```) in ```aut0 wlan0```
 ```bash
 nano /etc/network/interfaces
 ```
@@ -63,7 +66,7 @@ nano /etc/wpa_supplicant.conf
 ### Configure Autologin
 
 Edit the file as follows: ```nano /etc/inittab```
-Towards the bottom of the file comment the line: 
+Towards the bottom of the file comment the line (add a ```#``` at the beginning of the line): 
 ```
 #1:12345:respawn:/sbin/getty 38400 tty1
 ```
@@ -85,8 +88,10 @@ or via runlevels:
 http://www.armadeus.org/wiki/index.php?title=Automatically_launch_your_application
 
 ### Disabling IPv6
-```nano /etc/sysctl.conf```
-at the end of the file add:
+
+I still have not managed to disable IPv6 with the below instructions:
+
+Run: ```nano /etc/sysctl.conf``` and at the end of the file add:
 
 ```
 # Disable IPv6
