@@ -1,4 +1,4 @@
-SUMMARY = "The MonoPi Image with Qt 5!"
+SUMMARY = "The MonoPi Image version 2.0"
 HOMEPAGE = "https://github.com/mariodivece/blog/blob/master/2017-12-23-rpi-yocto-rocko/"
 LICENSE = "MIT"
 
@@ -135,4 +135,4 @@ ROOTFS_POSTPROCESS_COMMAND += " \
     disable_bootlogd ; \
  "
 
-export IMAGE_BASENAME = "monopi-minimal-image"
+export IMAGE_BASENAME = "monopi-image"
