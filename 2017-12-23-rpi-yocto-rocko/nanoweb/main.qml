@@ -1,7 +1,7 @@
 import QtQuick 2.7
 import QtQuick.Window 2.2
 import QtQuick.VirtualKeyboard 2.1
-import QtWebEngine 1.0
+import QtWebEngine 1.2
 
 Window {
     id: mainWindow
@@ -12,6 +12,11 @@ Window {
 
     function load(url) {
         webEngineView.url = url;
+    }
+
+    Shortcut {
+        sequence: "Alt+F4"
+        onActivated: Qt.quit()
     }
 
     Item {
